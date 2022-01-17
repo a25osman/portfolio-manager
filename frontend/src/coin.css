@@ -20,6 +20,7 @@
 .coin-row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .data {
@@ -32,4 +33,11 @@ img {
   width: 100px;
   height: 100px;
   padding-right: 10px;
+}
+
+.addTo {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: space-between;
 }

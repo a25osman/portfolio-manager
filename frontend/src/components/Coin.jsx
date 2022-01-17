@@ -1,5 +1,6 @@
 import React from "react";
 import "../coin.css";
+import Button from "@mui/material/Button";
 
 const Coin = ({ image, name, symbol, price, market, priceChange }) => {
   return (
@@ -20,6 +21,10 @@ const Coin = ({ image, name, symbol, price, market, priceChange }) => {
           ) : (
             <p className="priceChange red">{priceChange}%</p>
           )}
+        </div>
+        <div className="addTo">
+          <Button variant="contained">Add to Portfolio</Button>
+          <Button variant="contained">Add to favorites</Button>
         </div>
       </div>
     </div>
