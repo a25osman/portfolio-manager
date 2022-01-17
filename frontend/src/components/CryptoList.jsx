@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Search from "./Search";
 
-export default function VirtualizedList() {
+export default function CryptoList() {
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {

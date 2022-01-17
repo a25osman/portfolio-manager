@@ -5,12 +5,13 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-
+import { Link, NavLink, Router } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Favorites from "./Favorites";
 
 export default function NavBar(props) {
   const pages = ["My Portfolio", "My favorties", "News"];
@@ -34,6 +35,8 @@ export default function NavBar(props) {
     setAnchorElUser(null);
   };
 
+  const navigateFavorite = () => {};
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -46,7 +49,7 @@ export default function NavBar(props) {
           >
             Portfolio App
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -79,8 +82,15 @@ export default function NavBar(props) {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Button
+              sx={{ my: 2, color: "white", display: "block" }}
+              onClick={navigateFavorite}
+            >
+              {"Yo"}
+            </Button>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -91,7 +101,7 @@ export default function NavBar(props) {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -119,7 +129,7 @@ export default function NavBar(props) {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
