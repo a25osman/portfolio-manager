@@ -1,0 +1,35 @@
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+
+.coin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3em;
+}
+
+.namesymbol {
+  display: flex;
+  flex-direction: column;
+}
+
+.coin-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  padding-right: 10px;
+}

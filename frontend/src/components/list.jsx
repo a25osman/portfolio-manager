@@ -4,7 +4,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
-import { autocompleteClasses } from "@mui/material";
 
 function renderRow(props) {
   const { index, style } = props;
@@ -26,7 +25,6 @@ export default function VirtualizedList() {
         height: 400,
         maxWidth: 360,
         bgcolor: "background.paper",
-        margin: "auto",
       }}
     >
       <FixedSizeList
