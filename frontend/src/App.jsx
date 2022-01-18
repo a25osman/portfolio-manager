@@ -10,7 +10,7 @@ import {
   Link,
 } from "react-router-dom";
 
-import Favorties from "./components/Favorites";
+import Favorties from "./routes/Favorites";
 import Home from "./routes/Home";
 import News from "./routes/News";
 import Portfolio from "./routes/Portfolio";
@@ -23,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="news" element={<News />} />
         <Route path="portfolio" element={<Portfolio />} />
+        <Route path="favorites" element={<Favorties />} />
       </Routes>
     </div>
   );
