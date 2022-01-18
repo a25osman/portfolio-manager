@@ -11,7 +11,7 @@ const LineChart = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.coingecko.com/api/v3/coins/ethereum/market_chart/range?vs_currency=cad&from=1609477200&to=1642534784")
+      .get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=cad&from=1609477200&to=1642534784")
       .then((res) => {
         const getGraph = res.data.prices;
         const labels = [];
@@ -29,7 +29,7 @@ const LineChart = () => {
   const data = {
     labels: chart.labels,
     datasets: [{
-      label: 'Ethereum',
+      label: 'Bitcoin',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: chart.data,

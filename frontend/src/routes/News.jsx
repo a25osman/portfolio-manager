@@ -6,11 +6,11 @@ import NewItem from "../components/NewItem";
 
 const News = () => {
   const [news, setNews] = useState([]);
-
+  const d = new Date();
   useEffect(() => {
     axios
       .get(
-        "https://newsapi.org/v2/everything?q=(crypto AND bitcoin)&from=2021-12-17&sortBy=publishedAt&apiKey=ef200ee90c914524a04e35fdef13fbb7"
+        `https://newsapi.org/v2/everything?q=(crypto AND bitcoin)&from=${d}&sortBy=publishedAt&apiKey=ef200ee90c914524a04e35fdef13fbb7`
       )
       .then((res) => {
         const getNews = res.data.articles;
