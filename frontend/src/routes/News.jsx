@@ -1,6 +1,7 @@
 import { getBottomNavigationActionUtilityClass } from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import NavBar from "../components/NavBar";
 import NewItem from "../components/NewItem";
 
 const News = () => {
@@ -32,6 +33,7 @@ const News = () => {
 
   return (
     <div>
+      <NavBar />
       <h2>This is News Page</h2>
       {articles}
     </div>
