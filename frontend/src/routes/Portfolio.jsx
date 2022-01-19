@@ -7,7 +7,6 @@ const portfolio = () => {
     <div>
       <NavBar />
       <h2>This is Portfolio Page</h2>
-      <LineChart />
     </div>
   );
 };
