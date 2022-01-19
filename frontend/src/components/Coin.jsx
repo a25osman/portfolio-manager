@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Favorties from "../routes/Favorites";
 
-const Coin = ({ image, name, symbol, price, market, priceChange }) => {
+const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
   let navigate = useNavigate();
   const showChart = () => {
-    navigate("viewcrypto", { state: { name, price } });
+    navigate("viewcrypto", { state: { name, price, key } });
   };
   return (
     <div className="coin-container">
