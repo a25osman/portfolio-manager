@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Favorites from "../routes/Favorites";
 import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
 
 export default function NavBar(props) {
   let navigate = useNavigate();
@@ -21,6 +23,8 @@ export default function NavBar(props) {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,7 +41,9 @@ export default function NavBar(props) {
     setAnchorElUser(null);
   };
 
-  const navigateFavorite = () => {};
+  const login = () => {
+    axios.post("/api/login").then((res) => setCurrentUser(res.data));
+  };
 
   return (
     <AppBar position="static">
@@ -76,6 +82,35 @@ export default function NavBar(props) {
             >
               {"News"}
             </Button>
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            action="/news"
+          >
+            <TextField
+              id="outlined-required"
+              label="username"
+              defaultValue=""
+              variant="filled"
+            />
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              variant="filled"
+            />
+
+            {!currentUser && (
+              <Button onClick={login} variant="contained">
+                Submit
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
