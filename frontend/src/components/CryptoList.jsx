@@ -8,6 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Search from "./Search";
+import "../cryptolist.css";
 
 export default function CryptoList() {
   const [coins, setCoins] = useState([]);
@@ -66,24 +67,27 @@ export default function CryptoList() {
   }
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: 400,
-        maxWidth: 360,
-        bgcolor: "background.paper",
-      }}
-    >
-      <Search search={handleSearch} />
-      <FixedSizeList
-        height={600}
-        width={700}
-        itemSize={115}
-        itemCount={1}
-        overscanCount={5}
+    <div class="cryptolist">
+      <Box
+        sx={{
+          width: "100%",
+          height: 400,
+          maxWidth: 360,
+          bgcolor: "background.paper",
+        }}
       >
-        {renderRow}
-      </FixedSizeList>
-    </Box>
+        <Search search={handleSearch} />
+        <FixedSizeList
+          height={600}
+          width={600}
+          itemSize={115}
+          itemCount={1}
+          overscanCount={5}
+          backgroundColor={"red"}
+        >
+          {renderRow}
+        </FixedSizeList>
+      </Box>
+    </div>
   );
 }
