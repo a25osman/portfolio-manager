@@ -7,7 +7,7 @@ import Favorties from "../routes/Favorites";
 const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
   let navigate = useNavigate();
   const showChart = () => {
-    navigate("viewcrypto", { state: { name, price, key } });
+    navigate("viewcrypto", { state: { name, price } });
   };
   return (
     <div className="coin-container">

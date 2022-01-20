@@ -7,7 +7,7 @@ const Home = () => {
     <div>
       <NavBar />
       <h1>Tradeable Assets</h1>
-      <div class="cryptolist">
+      <div className="cryptolist">
         <CryptoList />
       </div>
     </div>

@@ -67,7 +67,7 @@ export default function CryptoList() {
   }
 
   return (
-    <div class="cryptolist">
+    <div className="cryptolist">
       <Box
         sx={{
           width: "100%",

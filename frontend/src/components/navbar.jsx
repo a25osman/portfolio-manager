@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -45,6 +45,10 @@ export default function NavBar(props) {
     axios.post("/api/login").then((res) => setCurrentUser(res.data));
   };
 
+  useEffect(() => {
+    axios.post("/api/authenticate").then((res) => setCurrentUser(res.data));
+  }, []);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -83,35 +87,35 @@ export default function NavBar(props) {
               {"News"}
             </Button>
           </Box>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "25ch" },
-            }}
-            noValidate
-            autoComplete="off"
-            action="/news"
-          >
-            <TextField
-              id="outlined-required"
-              label="username"
-              defaultValue=""
-              variant="filled"
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="filled"
-            />
+          {!currentUser && (
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+              action="/news"
+            >
+              <TextField
+                id="outlined-required"
+                label="username"
+                defaultValue=""
+                variant="filled"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                variant="filled"
+              />
 
-            {!currentUser && (
               <Button onClick={login} variant="contained">
                 Submit
               </Button>
-            )}
-          </Box>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
