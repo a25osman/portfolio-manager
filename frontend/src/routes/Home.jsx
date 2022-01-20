@@ -7,7 +7,9 @@ const Home = () => {
     <div>
       <NavBar />
       <h1>Tradeable Assets</h1>
-      <CryptoList />
+      <div class="cryptolist">
+        <CryptoList />
+      </div>
     </div>
   );
 };
