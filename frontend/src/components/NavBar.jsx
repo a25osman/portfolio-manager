@@ -42,11 +42,11 @@ export default function NavBar(props) {
   };
 
   const login = () => {
-    axios.post("/api/login").then((res) => setCurrentUser(res.data));
+    axios.post("http://localhost:3001/api/users/login", {}, { withCredentials: true }).then((res) => setCurrentUser(res.data));
   };
 
   useEffect(() => {
-    axios.post("/api/authenticate").then((res) => setCurrentUser(res.data));
+    axios.post("http://localhost:3001/api/users/authenticate").then((res) => setCurrentUser(res.data));
   }, []);
 
   return (
