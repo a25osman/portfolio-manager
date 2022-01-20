@@ -30,7 +30,7 @@ const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
         </div>
         <div className="addTo">
           <Button variant="contained">Add to Portfolio</Button>
-          <Button variant="contained">Add to favorites</Button>
+          <Button variant="contained">Add to Favorites</Button>
         </div>
       </div>
     </div>
