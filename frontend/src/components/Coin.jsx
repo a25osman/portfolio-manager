@@ -7,7 +7,7 @@ import Favorties from "../routes/Favorites";
 const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
   let navigate = useNavigate();
   const showChart = () => {
-    navigate("viewcrypto", { state: { name, price, key } });
+    navigate("viewcrypto", { state: { name, price } });
   };
   return (
     <div className="coin-container">
@@ -30,7 +30,7 @@ const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
         </div>
         <div className="addTo">
           <Button variant="contained">Add to Portfolio</Button>
-          <Button variant="contained">Add to favorites</Button>
+          <Button variant="contained">Add to Favorites</Button>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 const ViewCrypto = (props) => {
   const { state } = useLocation();
-  const { name, price, key } = state;
+  const { name, price } = state;
 
   return (
     <div>

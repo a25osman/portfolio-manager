@@ -50,3 +50,8 @@
 .priceChange green {
   color: green;
 }
+.cryptolist {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
