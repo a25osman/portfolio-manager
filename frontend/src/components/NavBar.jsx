@@ -42,12 +42,12 @@ export default function NavBar(props) {
   };
 
   const login = () => {
-    axios.post("http://localhost:3001/api/users/login", {}, { withCredentials: true }).then((res) => setCurrentUser(res.data));
+    axios.post("http://localhost:3001/api/users/login").then((res) => setCurrentUser(res.data));
   };
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/api/trends").then(res => console.log("look over here-----",res))
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/api/trends").then(res => console.log("look over here-----",res))
+  // }, []);
 
   useEffect(() => {
     axios.post("http://localhost:3001/api/users/authenticate").then((res) => setCurrentUser(res.data));

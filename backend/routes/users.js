@@ -6,8 +6,8 @@ module.exports = (db) => {
 
 	// POST /api/users/authenticate
   router.post("/authenticate", (req, res) => {
-		// const user = req.cookies.username ? {username: req.cookies.username} : null;
-		// res.json(user)
+		const user = req.cookies.username ? {username: req.cookies.username} : null;
+		res.json(user)
   })
 
   // POST /api/users/login
