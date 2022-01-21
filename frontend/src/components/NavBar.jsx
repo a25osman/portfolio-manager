@@ -20,6 +20,7 @@ export default function NavBar(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [currentUser, setCurrentUser] = useState("null");
+  const [errorCheck, setErrorCheck] = useState(null);
   let navigate = useNavigate();
   const pages = ["My Portfolio", "My favorties", "News"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -52,6 +53,16 @@ export default function NavBar(props) {
     // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
   };
 
+  const ErrorMessage = () => {
+    return (
+      <div>
+        <Typography>
+          <div>Impossible</div>
+        </Typography>
+      </div>
+    );
+  };
+
   const login = (event) => {
     event.preventDefault();
     // You should see email and password in console.
@@ -63,11 +74,15 @@ export default function NavBar(props) {
         { username: username, password: password },
         loginconfig
       )
-      .then((res) => setCurrentUser(res.data));
+      .then((res) => {
+        setCurrentUser(res.data);
+        setErrorCheck(null);
+      })
+
+      .catch(() => setErrorCheck("Error"));
   };
 
   const logout = (event) => {
-    console.log("Hello motherf");
     event.preventDefault();
     axios
       .post("http://localhost:3001/api/users/logout", {}, loginconfig)
@@ -149,6 +164,13 @@ export default function NavBar(props) {
               <Button type="submit" onClick={login} variant="contained">
                 Login
               </Button>
+            </Box>
+          )}
+          {errorCheck && (
+            <Box>
+              <Typography>
+                <div>Incorrect Username and/or Password</div>
+              </Typography>
             </Box>
           )}
           {currentUser && (
