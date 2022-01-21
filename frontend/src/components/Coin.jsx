@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Favorties from "../routes/Favorites";
 
-const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
+const Coin = ({ image, name, symbol, price, market, priceChange }) => {
   let navigate = useNavigate();
   const showChart = () => {
     navigate("viewcrypto", { state: { name, price } });
@@ -14,7 +14,7 @@ const Coin = ({ key, image, name, symbol, price, market, priceChange }) => {
       <div className="coin-row">
         <div className="coin">
           <img src={image} alt="crypto" onClick={() => showChart()} />
-          <div class="namesymbol">
+          <div className="namesymbol">
             <h1>{name}</h1>
             <p className="coin-sym">{symbol}</p>
           </div>

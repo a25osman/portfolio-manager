@@ -17,14 +17,15 @@ import TextField from "@mui/material/TextField";
 import axios from "axios";
 
 export default function NavBar(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [currentUser, setCurrentUser] = useState("null");
   let navigate = useNavigate();
   const pages = ["My Portfolio", "My favorties", "News"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const [currentUser, setCurrentUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -41,17 +42,42 @@ export default function NavBar(props) {
     setAnchorElUser(null);
   };
 
-  const config = {
-    withCredentials: true, 
+  const loginconfig = {
+    withCredentials: true,
     // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
-  }
+  };
+  const logoutconfig = {
+    method: "POST",
+    credentials: "same-origin",
+    // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
+  };
 
-  const login = () => {
-    axios.post("http://localhost:3001/api/users/login", {}, config).then((res) => setCurrentUser(res.data));
+  const login = (event) => {
+    event.preventDefault();
+    // You should see email and password in console.
+    // ..code to submit form to backend here...
+
+    axios
+      .post(
+        "http://localhost:3001/api/users/login",
+        { username: username, password: password },
+        loginconfig
+      )
+      .then((res) => setCurrentUser(res.data));
+  };
+
+  const logout = (event) => {
+    console.log("Hello motherf");
+    event.preventDefault();
+    axios
+      .post("http://localhost:3001/api/users/logout", {}, loginconfig)
+      .then((res) => setCurrentUser(null));
   };
 
   useEffect(() => {
-    axios.post("http://localhost:3001/api/users/authenticate").then((res) => setCurrentUser(res.data));
+    axios
+      .post("http://localhost:3001/api/users/authenticate", {}, loginconfig)
+      .then((res) => setCurrentUser(res.data));
   }, []);
 
   return (
@@ -95,6 +121,7 @@ export default function NavBar(props) {
           {!currentUser && (
             <Box
               component="form"
+              //onSubmit={login}
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "25ch" },
               }}
@@ -105,8 +132,9 @@ export default function NavBar(props) {
               <TextField
                 id="outlined-required"
                 label="username"
-                defaultValue=""
                 variant="filled"
+                value={username}
+                onInput={(e) => setUsername(e.target.value)}
               />
               <TextField
                 id="outlined-password-input"
@@ -114,10 +142,22 @@ export default function NavBar(props) {
                 type="password"
                 autoComplete="current-password"
                 variant="filled"
+                value={password}
+                onInput={(e) => setPassword(e.target.value)}
               />
 
-              <Button onClick={login} variant="contained">
-                Submit
+              <Button type="submit" onClick={login} variant="contained">
+                Login
+              </Button>
+            </Box>
+          )}
+          {currentUser && (
+            <Box component="form" onSubmit={logout}>
+              <Typography>
+                <div>Hello, {currentUser.username}</div>
+              </Typography>
+              <Button type="submit" onClick={logout} variant="contained">
+                Logout
               </Button>
             </Box>
           )}
