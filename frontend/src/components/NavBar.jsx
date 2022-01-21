@@ -41,13 +41,14 @@ export default function NavBar(props) {
     setAnchorElUser(null);
   };
 
-  const login = () => {
-    axios.post("http://localhost:3001/api/users/login").then((res) => setCurrentUser(res.data));
-  };
+  const config = {
+    withCredentials: true, 
+    // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
+  }
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/api/trends").then(res => console.log("look over here-----",res))
-  // }, []);
+  const login = () => {
+    axios.post("http://localhost:3001/api/users/login", {}, config).then((res) => setCurrentUser(res.data));
+  };
 
   useEffect(() => {
     axios.post("http://localhost:3001/api/users/authenticate").then((res) => setCurrentUser(res.data));
