@@ -13,7 +13,7 @@ const PortfolioCharts = (props) => {
       )
       .then((res) => {
         // color library for multiple line
-        const colors = ["red", "blue", "green"];
+        const colors = ["red", "blue", "green","purple"];
 
         // building the labels (x-axis) array
         const crypto = res.data[0]
