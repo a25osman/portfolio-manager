@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,10 +16,12 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 
+export const userContext = createContext();
 export default function NavBar(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [currentUser, setCurrentUser] = useState("null");
+  const globalState = currentUser;
   const [errorCheck, setErrorCheck] = useState(null);
   let navigate = useNavigate();
   const pages = ["My Portfolio", "My favorties", "News"];
@@ -47,11 +49,6 @@ export default function NavBar(props) {
     withCredentials: true,
     // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
   };
-  const logoutconfig = {
-    method: "POST",
-    credentials: "same-origin",
-    // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
-  };
 
   const ErrorMessage = () => {
     return (
@@ -65,9 +62,6 @@ export default function NavBar(props) {
 
   const login = (event) => {
     event.preventDefault();
-    // You should see email and password in console.
-    // ..code to submit form to backend here...
-
     axios
       .post(
         "http://localhost:3001/api/users/login",

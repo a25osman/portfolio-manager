@@ -3,12 +3,22 @@ import "../coin.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Favorties from "../routes/Favorites";
+//import accessGlobalState, { userContext } from "./NavBar";
+import { userContext } from "./NavBar";
+import { useContext } from "react";
+import { Typography } from "@mui/material";
 
-const Coin = ({ image, name, symbol, price, market, priceChange }) => {
+const Coin = ({ image, name, symbol, price, market, priceChange, props }) => {
   let navigate = useNavigate();
   const showChart = () => {
     navigate("viewcrypto", { state: { name, price } });
   };
+  const addToPortfolio = () => {
+    navigate("portfolio", {
+      state: { image, name, symbol, price, market, priceChange },
+    });
+  };
+
   return (
     <div className="coin-container">
       <div className="coin-row">
@@ -21,15 +31,18 @@ const Coin = ({ image, name, symbol, price, market, priceChange }) => {
         </div>
         <div className="data">
           <p className="price">${price}</p>
-          {/* <p className="mrk-cap">${market}</p> */}
+          {/* <p className="mrk-cap">${}</p> */}
           {priceChange > 0 ? (
             <p className="priceChange green">{priceChange}%</p>
           ) : (
             <p className="priceChange red">{priceChange}%</p>
           )}
         </div>
+
         <div className="addTo">
-          <Button variant="contained">Add to Portfolio</Button>
+          <Button onClick={() => addToPortfolio()} variant="contained">
+            Add to Portfolio
+          </Button>
           <Button variant="contained">Add to Favorites</Button>
         </div>
       </div>
