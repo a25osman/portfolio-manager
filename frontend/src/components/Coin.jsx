@@ -8,7 +8,16 @@ import { userContext } from "./NavBar";
 import { useContext } from "react";
 import { Typography } from "@mui/material";
 
-const Coin = ({ image, name, symbol, price, market, priceChange, props }) => {
+const Coin = ({
+  image,
+  name,
+  symbol,
+  price,
+  market,
+  priceChange,
+  props,
+  currentUser,
+}) => {
   let navigate = useNavigate();
   const showChart = () => {
     navigate("viewcrypto", { state: { name, price } });
@@ -38,13 +47,14 @@ const Coin = ({ image, name, symbol, price, market, priceChange, props }) => {
             <p className="priceChange red">{priceChange}%</p>
           )}
         </div>
-
-        <div className="addTo">
-          <Button onClick={() => addToPortfolio()} variant="contained">
-            Add to Portfolio
-          </Button>
-          <Button variant="contained">Add to Favorites</Button>
-        </div>
+        {currentUser && (
+          <div className="addTo">
+            <Button onClick={() => addToPortfolio()} variant="contained">
+              Add to Portfolio
+            </Button>
+            <Button variant="contained">Add to Favorites</Button>
+          </div>
+        )}
       </div>
     </div>
   );

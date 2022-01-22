@@ -83,11 +83,11 @@ export default function NavBar(props) {
       .then((res) => setCurrentUser(null));
   };
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/api/users/authenticate", {}, loginconfig)
-      .then((res) => setCurrentUser(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:3001/api/users/authenticate", {}, loginconfig)
+  //     .then((res) => setCurrentUser(res.data));
+  // }, []);
 
   return (
     <AppBar position="static">
@@ -102,14 +102,16 @@ export default function NavBar(props) {
             >
               {<h2>Portfolio App</h2>}
             </Button>
-            <Button
-              sx={{ my: 2, color: "white", display: "block" }}
-              onClick={async () => {
-                navigate("/portfolio");
-              }}
-            >
-              {"My Portfolio"}
-            </Button>
+            {props.currentUser && (
+              <Button
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={async () => {
+                  navigate("/portfolio");
+                }}
+              >
+                {"My Portfolio"}
+              </Button>
+            )}
             <Button
               sx={{ my: 2, color: "white", display: "block" }}
               onClick={async () => {
@@ -127,7 +129,7 @@ export default function NavBar(props) {
               {"News"}
             </Button>
           </Box>
-          {!currentUser && (
+          {!props.currentUser && (
             <Box
               component="form"
               //onSubmit={login}
@@ -142,8 +144,8 @@ export default function NavBar(props) {
                 id="outlined-required"
                 label="username"
                 variant="filled"
-                value={username}
-                onInput={(e) => setUsername(e.target.value)}
+                value={props.username}
+                onInput={(e) => props.setUsername(e.target.value)}
               />
               <TextField
                 id="outlined-password-input"
@@ -151,28 +153,24 @@ export default function NavBar(props) {
                 type="password"
                 autoComplete="current-password"
                 variant="filled"
-                value={password}
-                onInput={(e) => setPassword(e.target.value)}
+                value={props.password}
+                onInput={(e) => props.setPassword(e.target.value)}
               />
 
-              <Button type="submit" onClick={login} variant="contained">
+              <Button type="submit" onClick={props.login} variant="contained">
                 Login
               </Button>
             </Box>
           )}
-          {errorCheck && (
+          {props.errorCheck && (
             <Box>
-              <Typography>
-                <div>Incorrect Username and/or Password</div>
-              </Typography>
+              <Typography>Incorrect Username and/or Password</Typography>
             </Box>
           )}
-          {currentUser && (
-            <Box component="form" onSubmit={logout}>
-              <Typography>
-                <div>Hello, {currentUser.username}</div>
-              </Typography>
-              <Button type="submit" onClick={logout} variant="contained">
+          {props.currentUser && (
+            <Box component="form" onSubmit={props.logout}>
+              <Typography>Hello, {props.currentUser.username}</Typography>
+              <Button type="submit" onClick={props.logout} variant="contained">
                 Logout
               </Button>
             </Box>

@@ -10,7 +10,7 @@ import { FixedSizeList } from "react-window";
 import Search from "./Search";
 import "../cryptolist.css";
 
-export default function CryptoList() {
+export default function CryptoList(propss) {
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ export default function CryptoList() {
             price={coin.current_price}
             market={coin.market_cap}
             priceChange={coin.price_change_percentage_24h}
+            currentUser={propss.currentUser}
           />
         );
       });
