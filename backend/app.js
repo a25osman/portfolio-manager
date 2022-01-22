@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const portfolioRouter = require("./routes/portfolio");
 const trendsRouter = require("./routes/trends");
+const transactionsRouter = require("./routes/transactions")
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter(db));
 app.use('/api/portfolio', portfolioRouter(db));
 app.use('/api/trends', trendsRouter(db));
+app.use('/api/transactions', transactionsRouter(db));
 
 
 module.exports = app;
