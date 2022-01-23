@@ -5,40 +5,47 @@ import axios from "axios";
 import { FixedSizeList } from "react-window";
 
 export default function Holdings(props) {
-  const [crypto, setCrypto] = useState("");
-  const userdata = {};
-  let dataArray = [];
+  const [crypto, setCrypto] = useState([]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/portfolio/dsanders/inventory`)
       .then((res) => {
+        const dataArray = [];
         for (const key in res.data.timePeriodEnd) {
-          userdata[key] = res.data.timePeriodEnd[key];
-          dataArray.push([key, res.data.timePeriodEnd[key].coin_symbol]);
+          const coin = res.data.timePeriodEnd;
+          dataArray.push(coin[key]);
         }
-        console.log(dataArray);
+        setCrypto(dataArray)
       });
-  });
-  function renderTable() {
-    dataArray.map((x) => {
+  }, []);
+
+  const table = crypto.map((coinObj) => {
       return (
         <tr>
-          <td>{x[0]}</td>
+          <td>{coinObj.coin_name}</td>
+          <td>{coinObj.coin_symbol}</td>
+          <td>{coinObj.qty}</td>
+          <td>{coinObj.price}</td>
         </tr>
       );
     });
-  }
-  console.log(renderTable);
+  
+
   return (
     <div>
       <table>
-        <tr>
-          <td>Coin</td>
-          <td>Symbol</td>
-          <td>Qty</td>
-          <td>Price</td>
-        </tr>
-        <div>{renderTable}</div>
+        <thead>
+          <tr>
+            <th>Coin</th>
+            <th>Symbol</th>
+            <th>Qty</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {table}
+        </tbody>
       </table>
     </div>
   );

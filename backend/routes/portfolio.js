@@ -157,12 +157,14 @@ module.exports = (db) => {
     ).then((data) => {
       for (let obj of data.rows) {
         inventory[obj.coin_name] = {
+          coin_name : obj.coin_name,
           coin_symbol: obj.coin_symbol,
           qty: 0,
           price: null,
           asset_id: obj.asset_id,
         }; //sym, qty, price, id
         init[obj.coin_name] = {
+          coin_name : obj.coin_name,
           coin_symbol: obj.coin_symbol,
           qty: 0,
           price: null,
