@@ -13,6 +13,7 @@ import axios from "axios";
 import { Typography } from "@mui/material";
 import { typography } from "@mui/system";
 import PortfolioCharts from "../chart/PortfolioCharts";
+import Holdings from "../components/Holdings";
 
 const Portfolio = (props) => {
   const { state } = useLocation();
@@ -34,7 +35,6 @@ const Portfolio = (props) => {
           coinData.push(property);
         }
       });
-      console.log(coinData);
     });
 
   return (
@@ -51,6 +51,7 @@ const Portfolio = (props) => {
         }}
       >
         <PortfolioCharts currentUser={user.username} />
+        <Holdings />
       </Box>
     </div>
   );

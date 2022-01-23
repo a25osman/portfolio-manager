@@ -20,16 +20,15 @@ const PortfolioCharts = (props) => {
         const cryptoInformation = crypto[name];
         // from the timeframe(the key), re-order to the accending dates
         const labels = Object.keys(cryptoInformation).sort((a, b) => a - b);
-        console.log("Response is ", res.data);
+
         // building the data points (y-axis)
         const datasets = res.data.map((crypto, i) => {
-          console.log(crypto);
           let name = Object.keys(crypto)[0];
           let cryptoInformation = crypto[name];
           cryptoInformation = Object.entries(cryptoInformation).sort((a, b) => {
             return a[0] - b[0];
           });
-          console.log("after sorting: ", cryptoInformation);
+
           cryptoInformation = cryptoInformation.map((d) => d[1][0]);
 
           return {

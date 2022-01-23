@@ -37,7 +37,7 @@ const Coin = ({
     axios
       .post(
         `http://localhost:3001/api/portfolio/${currentUser.username}`,
-        { coin: name, coin_symbol: symbol },
+        { coin: name.toLowerCase(), coin_symbol: symbol },
         loginconfig
       )
       .then((res) => {

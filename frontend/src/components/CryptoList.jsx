@@ -44,7 +44,7 @@ export default function CryptoList(propss) {
       setCoins(update);
     }
   };
-
+  console.log("the coins ", coins);
   function renderRow(props) {
     const { index, style } = props;
     return coins
