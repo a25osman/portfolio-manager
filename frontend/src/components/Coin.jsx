@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState, createContext } from "react";
 import "../coin.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import Favorties from "../routes/Favorites";
 import { userContext } from "./NavBar";
 import { useContext } from "react";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 const Coin = ({
   image,
@@ -19,13 +21,30 @@ const Coin = ({
   currentUser,
 }) => {
   let navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const showChart = () => {
-    navigate("viewcrypto", { state: { name, price } });
+    navigate("viewcrypto", { state: { name, price, currentUser } });
   };
+  const loginconfig = {
+    withCredentials: true,
+  };
+
   const addToPortfolio = () => {
-    navigate("portfolio", {
-      state: { image, name, symbol, price, market, priceChange },
-    });
+    // navigate("portfolio", {
+    //   state: { image, name, symbol, price, market, priceChange },
+    // });
+
+    axios
+      .post(
+        `http://localhost:3001/api/portfolio/${currentUser.username}`,
+        { coin: name, coin_symbol: symbol },
+        loginconfig
+      )
+      .then((res) => {
+        console.log("response is this; ", res.data);
+      })
+
+      .catch((err) => console.log("Error is this : ", err));
   };
 
   return (
@@ -52,7 +71,7 @@ const Coin = ({
             <Button onClick={() => addToPortfolio()} variant="contained">
               Add to Portfolio
             </Button>
-            <Button variant="contained">Add to Favorites</Button>
+            {/* <Button variant="contained">Add to Favorites</Button> */}
           </div>
         )}
       </div>

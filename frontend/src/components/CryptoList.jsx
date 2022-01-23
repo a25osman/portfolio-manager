@@ -23,7 +23,7 @@ export default function CryptoList(propss) {
           return { ...d, show: true };
         });
         setCoins(data);
-        console.log(data);
+        //console.log(data);
       });
   }, []);
 

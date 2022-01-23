@@ -3,9 +3,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import NewItem from "../components/NewItem";
-
+import { useLocation } from "react-router";
 const News = () => {
   const [news, setNews] = useState([]);
+  const { state } = useLocation();
+  const user = state;
   const d = new Date();
   useEffect(() => {
     axios
@@ -33,7 +35,7 @@ const News = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar currentUser={user} />
       <h2>This is News Page</h2>
       {articles}
     </div>

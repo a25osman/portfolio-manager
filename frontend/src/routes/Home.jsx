@@ -5,8 +5,10 @@ import { useLocation } from "react-router";
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [currentUser, setCurrentUser] = useState("null");
@@ -42,6 +44,8 @@ const Home = () => {
   };
 
   const logout = (event) => {
+    navigate("/");
+
     event.preventDefault();
     axios
       .post("http://localhost:3001/api/users/logout", {}, loginconfig)

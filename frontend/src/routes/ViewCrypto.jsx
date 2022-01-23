@@ -6,12 +6,12 @@ import Box from "@mui/material/Box";
 
 const ViewCrypto = (props) => {
   const { state } = useLocation();
-  const { name, price } = state;
+  const { name, price, currentUser } = state;
 
   return (
     <div>
-      <NavBar />
-      <h2>View Crypto Page</h2>
+      <NavBar currentUser={currentUser} />
+      <h2>{name}</h2>
 
       <Box
         sx={{

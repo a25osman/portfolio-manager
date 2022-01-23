@@ -47,8 +47,9 @@ export default function NavBar(props) {
 
   const loginconfig = {
     withCredentials: true,
-    // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
   };
+
+  const loggedinuser = props.currentUser;
 
   const ErrorMessage = () => {
     return (
@@ -106,7 +107,10 @@ export default function NavBar(props) {
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 onClick={async () => {
-                  navigate("/portfolio");
+                  //navigate(`/portfolio`);
+                  navigate("portfolio", {
+                    state: { user: props.currentUser },
+                  });
                 }}
               >
                 {"My Portfolio"}
@@ -118,12 +122,12 @@ export default function NavBar(props) {
                 navigate("/favorites");
               }}
             >
-              {"My Favorites"}
+              {"Search Trends"}
             </Button>
             <Button
               sx={{ my: 2, color: "white", display: "block" }}
               onClick={async () => {
-                navigate("/news");
+                navigate("/news", { state: { loggedinuser } });
               }}
             >
               {"News"}
