@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import NewItem from "../components/NewItem";
+import '../css/Newscss.css'
 import { useLocation } from "react-router";
 const News = () => {
   const [news, setNews] = useState([]);
@@ -36,8 +37,8 @@ const News = () => {
   return (
     <div>
       <NavBar currentUser={user} />
-      <h2>This is News Page</h2>
-      {articles}
+      <h1 className="news_title">Daily News</h1>
+      <div className="news_parent">{articles}</div>
     </div>
   );
 };
