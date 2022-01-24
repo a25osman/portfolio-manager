@@ -74,7 +74,7 @@ export default function NavBar(props) {
                 sx={{ my: 2, color: "white", display: "block" }}
                 onClick={async () => {
                   //navigate(`/portfolio`);
-                  navigate("portfolio", {
+                  navigate("/portfolio", {
                     state: { user: currentUser },
                   });
                 }}

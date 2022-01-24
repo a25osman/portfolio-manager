@@ -6,18 +6,19 @@ import Box from "@mui/material/Box";
 import { FixedSizeList } from "react-window";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Coin from "../components/Coin";
 import "../App.css";
 import axios from "axios";
-import { Typography } from "@mui/material";
-import { typography } from "@mui/system";
 import PortfolioCharts from "../chart/PortfolioCharts";
 import Holdings from "../components/Holdings";
+import UserTransactions from "../components/UserTransactions";
+import { UserContext } from "../App";
 
 const Portfolio = (props) => {
   const { state } = useLocation();
   const { user } = state;
+  const { login, logout, currentUser } = useContext(UserContext);
   const coinData = [];
   const loginconfig = {
     withCredentials: true,
@@ -25,8 +26,8 @@ const Portfolio = (props) => {
 
   axios
     .get(
-      `http://localhost:3001/api/portfolio/${user.username}`,
-      { username: user },
+      `http://localhost:3001/api/portfolio/${currentUser.username}`,
+      { username: currentUser.username },
       loginconfig
     )
     .then((res) => {
@@ -36,7 +37,7 @@ const Portfolio = (props) => {
         }
       });
     });
-
+  console.log(currentUser);
   return (
     <div>
       <NavBar currentUser={user} />
@@ -50,8 +51,9 @@ const Portfolio = (props) => {
           bgcolor: "background.paper",
         }}
       >
-        <PortfolioCharts currentUser={user.username} />
+        <PortfolioCharts currentUser={currentUser.username} />
         <Holdings />
+        <UserTransactions />
       </Box>
     </div>
   );

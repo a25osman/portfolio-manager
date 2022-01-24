@@ -8,105 +8,108 @@ const PortfolioCharts = (props) => {
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
-    .then((res) => {
-        
-      const getDaysArray = function(start, end) {
-        let arr = []
-        for(let dt = new Date(start); dt <= end; dt.setDate(dt.getDate() + 1)){
+      .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
+      .then((res) => {
+        const getDaysArray = function (start, end) {
+          let arr = [];
+          for (
+            let dt = new Date(start);
+            dt <= end;
+            dt.setDate(dt.getDate() + 1)
+          ) {
             arr.push(new Date(dt));
-        }
-        return arr;
-      };
+          }
+          return arr;
+        };
 
-      
-      axios
-      .get(`http://localhost:3001/api/portfolio/${props.currentUser}/inventory`)
-      .then((resp) => {
+        axios
+          .get(
+            `http://localhost:3001/api/portfolio/${props.currentUser}/inventory`
+          )
+          .then((resp) => {
+            const coinObj = resp.data.timePeriodStart;
+            const today = new Date();
+            let tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 10);
+            let firstDay = new Date(tomorrow);
 
-        const coinObj = resp.data.timePeriodStart
-        const today = new Date()
-        let tomorrow =  new Date()
-        tomorrow.setDate(today.getDate() + 10)
-        let firstDay = new Date(tomorrow)
+            for (let key in coinObj) {
+              const currentDate = coinObj[key].date;
 
-        for (let key in coinObj){
-          const currentDate = (coinObj[key].date);
-
-          if (currentDate) {
-            if (new Date(currentDate) < firstDay) {
-              firstDay = coinObj[key].date;
+              if (currentDate) {
+                if (new Date(currentDate) < firstDay) {
+                  firstDay = coinObj[key].date;
+                }
+              }
             }
-          }
-        }
 
-        const coins = {}
-        for (let obj of res.data) {
-          for (let key in obj) {
-            coins[key] = obj[key];
-          }
-        }
-        
-        const values = {}
-        const allDays = getDaysArray(new Date(firstDay), new Date())
-        for (let date of allDays) {
-          values[date.toLocaleDateString("en-US")] = 0;
-        }
-        
-        for (let coin in coins) {
-          for (let date in values) {
-            if (coins[coin][date]) {
-              const amt = coins[coin][date][2];
-              values[date] += amt
+            const coins = {};
+            for (let obj of res.data) {
+              for (let key in obj) {
+                coins[key] = obj[key];
+              }
             }
-          }
-        }
-        console.log(values)
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-        // PLEASE GRAPHS values --> it is an object and it is not sorted yet
 
-        // //color library for multiple line
-        // const colors = ["red", "blue", "green", "purple"];
+            const values = {};
+            const allDays = getDaysArray(new Date(firstDay), new Date());
+            for (let date of allDays) {
+              values[date.toLocaleDateString("en-US")] = 0;
+            }
 
-        // // building the labels (x-axis) array
-        // const crypto = res.data[0];
-        // const name = Object.keys(crypto)[0];
-        // // something like crypto.bitcoin, we do [name] because the name of the coin is dynamic
-        // const cryptoInformation = crypto[name];
-        // // from the timeframe(the key), re-order to the accending dates
-        // const labels = Object.keys(cryptoInformation).sort((a, b) => a - b);
+            for (let coin in coins) {
+              for (let date in values) {
+                if (coins[coin][date]) {
+                  const amt = coins[coin][date][2];
+                  values[date] += amt;
+                }
+              }
+            }
+            console.log (values)
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
 
-        // // building the data points (y-axis)
-        // const datasets = res.data.map((crypto, i) => {
-        //   let name = Object.keys(crypto)[0];
-        //   let cryptoInformation = crypto[name];
-        //   cryptoInformation = Object.entries(cryptoInformation).sort((a, b) => {
-        //     return a[0] - b[0];
-        //   });
+            // //color library for multiple line
+            // const colors = ["red", "blue", "green", "purple"];
 
-        //   cryptoInformation = cryptoInformation.map((d) => d[1][0]);
+            // // building the labels (x-axis) array
+            // const crypto = res.data[0];
+            // const name = Object.keys(crypto)[0];
+            // // something like crypto.bitcoin, we do [name] because the name of the coin is dynamic
+            // const cryptoInformation = crypto[name];
+            // // from the timeframe(the key), re-order to the accending dates
+            // const labels = Object.keys(cryptoInformation).sort((a, b) => a - b);
 
-        //   return {
-        //     label: name,
-        //     data: cryptoInformation,
-        //     borderColor: colors[i],
-        //     backgroundColor: colors[i],
-        //   };
-        // });
+            // // building the data points (y-axis)
+            // const datasets = res.data.map((crypto, i) => {
+            //   let name = Object.keys(crypto)[0];
+            //   let cryptoInformation = crypto[name];
+            //   cryptoInformation = Object.entries(cryptoInformation).sort((a, b) => {
+            //     return a[0] - b[0];
+            //   });
 
-        // setChart((prev) => {
-        //   return { labels, datasets };
-        // });
-      })
-    .catch (err => console.log(err)) 
-    });
+            //   cryptoInformation = cryptoInformation.map((d) => d[1][0]);
+
+            //   return {
+            //     label: name,
+            //     data: cryptoInformation,
+            //     borderColor: colors[i],
+            //     backgroundColor: colors[i],
+            //   };
+            // });
+
+            // setChart((prev) => {
+            //   return { labels, datasets };
+            // });
+          })
+          .catch((err) => console.log(err));
+      });
   }, []);
 
   useEffect(() => {
