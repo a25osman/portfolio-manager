@@ -59,27 +59,25 @@ const Home = () => {
       .then((res) => setCurrentUser(res.data));
   }, []);
 
-  const data = { login, logout, currentUser };
+  const data = {
+    login,
+    logout,
+    currentUser,
+    errorCheck,
+    setPassword,
+    setUsername,
+    username,
+    password,
+  };
 
   return (
-    <UserContext.Provider value={data}>
-      <div>
-        <NavBar
-          // login={login}
-          errorCheck={errorCheck}
-          // currentUser={currentUser}
-          setUsername={setUsername}
-          setPassword={setPassword}
-          logout={logout}
-          username={username}
-          password={password}
-        />
-        <h1>Tradeable Assets</h1>
-        <div className="cryptolist">
-          <CryptoList currentUser={currentUser} />
-        </div>
+    <div>
+      <NavBar />
+      <h1>Tradeable Assets</h1>
+      <div className="cryptolist">
+        <CryptoList />
       </div>
-    </UserContext.Provider>
+    </div>
   );
 };
 

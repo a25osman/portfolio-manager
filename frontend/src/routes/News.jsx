@@ -1,13 +1,15 @@
 import { getBottomNavigationActionUtilityClass } from "@mui/material";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import NewItem from "../components/NewItem";
-import '../css/Newscss.css'
+import "../css/Newscss.css";
 import { useLocation } from "react-router";
+import { UserContext } from "./Home";
 const News = () => {
   const [news, setNews] = useState([]);
   const { state } = useLocation();
+  //const { currentUser } = useContext(UserContext);
   const user = state;
   const d = new Date();
   useEffect(() => {
@@ -36,7 +38,7 @@ const News = () => {
 
   return (
     <div>
-      <NavBar currentUser={user} />
+      <NavBar />
       <h1 className="news_title">Daily News</h1>
       <div className="news_parent">{articles}</div>
     </div>

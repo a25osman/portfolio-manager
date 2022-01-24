@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Search from "./Search";
 import "../cryptolist.css";
-import { UserContext } from "../routes/Home";
+import { UserContext } from "../App";
 
 export default function CryptoList(propss) {
   const { login, logout, currentUser } = useContext(UserContext);
@@ -46,7 +46,7 @@ export default function CryptoList(propss) {
       setCoins(update);
     }
   };
-  console.log("the coins ", coins);
+  //console.log("the coins ", coins);
   function renderRow(props) {
     const { index, style } = props;
     return coins

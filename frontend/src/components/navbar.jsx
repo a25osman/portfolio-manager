@@ -15,15 +15,24 @@ import Favorites from "../routes/Favorites";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import { UserContext } from "../routes/Home";
+import { UserContext } from "../App";
 
 export default function NavBar(props) {
-  const { login, logout, currentUser } = useContext(UserContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    login,
+    logout,
+    currentUser,
+    errorCheck,
+    setPassword,
+    setUsername,
+    username,
+    password,
+  } = useContext(UserContext);
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
   // const [currentUser, setCurrentUser] = useState("null");
   const globalState = currentUser;
-  const [errorCheck, setErrorCheck] = useState(null);
+  //const [errorCheck, setErrorCheck] = useState(null);
   let navigate = useNavigate();
   const pages = ["My Portfolio", "My favorties", "News"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -46,35 +55,6 @@ export default function NavBar(props) {
       </div>
     );
   };
-
-  // const login = (event) => {
-  //   event.preventDefault();
-  //   axios
-  //     .post(
-  //       "http://localhost:3001/api/users/login",
-  //       { username: username, password: password },
-  //       loginconfig
-  //     )
-  //     .then((res) => {
-  //       setCurrentUser(res.data);
-  //       setErrorCheck(null);
-  //     })
-
-  //     .catch(() => setErrorCheck("Error"));
-  // };
-
-  // const logout = (event) => {
-  //   event.preventDefault();
-  //   axios
-  //     .post("http://localhost:3001/api/users/logout", {}, loginconfig)
-  //     .then((res) => setCurrentUser(null));
-  // };
-
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:3001/api/users/authenticate", {}, loginconfig)
-  //     .then((res) => setCurrentUser(res.data));
-  // }, []);
 
   return (
     <AppBar position="static">
@@ -133,8 +113,8 @@ export default function NavBar(props) {
                 id="outlined-required"
                 label="username"
                 variant="filled"
-                value={props.username}
-                onInput={(e) => props.setUsername(e.target.value)}
+                value={username}
+                onInput={(e) => setUsername(e.target.value)}
               />
               <TextField
                 id="outlined-password-input"
@@ -142,8 +122,8 @@ export default function NavBar(props) {
                 type="password"
                 autoComplete="current-password"
                 variant="filled"
-                value={props.password}
-                onInput={(e) => props.setPassword(e.target.value)}
+                value={password}
+                onInput={(e) => setPassword(e.target.value)}
               />
 
               <Button type="submit" onClick={login} variant="contained">
@@ -151,15 +131,15 @@ export default function NavBar(props) {
               </Button>
             </Box>
           )}
-          {props.errorCheck && (
+          {errorCheck && (
             <Box>
               <Typography>Incorrect Username and/or Password</Typography>
             </Box>
           )}
           {currentUser && (
-            <Box component="form" onSubmit={props.logout}>
+            <Box component="form">
               <Typography>Hello, {currentUser.username}</Typography>
-              <Button type="submit" onClick={props.logout} variant="contained">
+              <Button type="submit" onClick={logout} variant="contained">
                 Logout
               </Button>
             </Box>
