@@ -7,6 +7,8 @@ import axios from "axios";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+export const UserContext = createContext();
+
 const Home = () => {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -25,7 +27,6 @@ const Home = () => {
   };
   const loginconfig = {
     withCredentials: true,
-    // headers: {"Access-Control-Allow-Origin": "http://localhost:3001", "Content-Type": "application/json"}
   };
   const login = (event) => {
     event.preventDefault();
@@ -58,23 +59,27 @@ const Home = () => {
       .then((res) => setCurrentUser(res.data));
   }, []);
 
+  const data = { login, logout, currentUser };
+
   return (
-    <div>
-      <NavBar
-        login={login}
-        errorCheck={errorCheck}
-        currentUser={currentUser}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        logout={logout}
-        username={username}
-        password={password}
-      />
-      <h1>Tradeable Assets</h1>
-      <div className="cryptolist">
-        <CryptoList currentUser={currentUser} />
+    <UserContext.Provider value={data}>
+      <div>
+        <NavBar
+          // login={login}
+          errorCheck={errorCheck}
+          // currentUser={currentUser}
+          setUsername={setUsername}
+          setPassword={setPassword}
+          logout={logout}
+          username={username}
+          password={password}
+        />
+        <h1>Tradeable Assets</h1>
+        <div className="cryptolist">
+          <CryptoList currentUser={currentUser} />
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 };
 

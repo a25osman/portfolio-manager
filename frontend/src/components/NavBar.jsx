@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,12 +15,13 @@ import Favorites from "../routes/Favorites";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { UserContext } from "../routes/Home";
 
-export const userContext = createContext();
 export default function NavBar(props) {
+  const { login, logout, currentUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [currentUser, setCurrentUser] = useState("null");
+  // const [currentUser, setCurrentUser] = useState("null");
   const globalState = currentUser;
   const [errorCheck, setErrorCheck] = useState(null);
   let navigate = useNavigate();
@@ -29,21 +30,6 @@ export default function NavBar(props) {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const loginconfig = {
     withCredentials: true,
@@ -61,28 +47,28 @@ export default function NavBar(props) {
     );
   };
 
-  const login = (event) => {
-    event.preventDefault();
-    axios
-      .post(
-        "http://localhost:3001/api/users/login",
-        { username: username, password: password },
-        loginconfig
-      )
-      .then((res) => {
-        setCurrentUser(res.data);
-        setErrorCheck(null);
-      })
+  // const login = (event) => {
+  //   event.preventDefault();
+  //   axios
+  //     .post(
+  //       "http://localhost:3001/api/users/login",
+  //       { username: username, password: password },
+  //       loginconfig
+  //     )
+  //     .then((res) => {
+  //       setCurrentUser(res.data);
+  //       setErrorCheck(null);
+  //     })
 
-      .catch(() => setErrorCheck("Error"));
-  };
+  //     .catch(() => setErrorCheck("Error"));
+  // };
 
-  const logout = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:3001/api/users/logout", {}, loginconfig)
-      .then((res) => setCurrentUser(null));
-  };
+  // const logout = (event) => {
+  //   event.preventDefault();
+  //   axios
+  //     .post("http://localhost:3001/api/users/logout", {}, loginconfig)
+  //     .then((res) => setCurrentUser(null));
+  // };
 
   // useEffect(() => {
   //   axios
@@ -103,13 +89,13 @@ export default function NavBar(props) {
             >
               {<h2>Portfolio App</h2>}
             </Button>
-            {props.currentUser && (
+            {currentUser && (
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 onClick={async () => {
                   //navigate(`/portfolio`);
                   navigate("portfolio", {
-                    state: { user: props.currentUser },
+                    state: { user: currentUser },
                   });
                 }}
               >
@@ -133,10 +119,9 @@ export default function NavBar(props) {
               {"News"}
             </Button>
           </Box>
-          {!props.currentUser && (
+          {!currentUser && (
             <Box
               component="form"
-              //onSubmit={login}
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "25ch" },
               }}
@@ -161,7 +146,7 @@ export default function NavBar(props) {
                 onInput={(e) => props.setPassword(e.target.value)}
               />
 
-              <Button type="submit" onClick={props.login} variant="contained">
+              <Button type="submit" onClick={login} variant="contained">
                 Login
               </Button>
             </Box>
@@ -171,9 +156,9 @@ export default function NavBar(props) {
               <Typography>Incorrect Username and/or Password</Typography>
             </Box>
           )}
-          {props.currentUser && (
+          {currentUser && (
             <Box component="form" onSubmit={props.logout}>
-              <Typography>Hello, {props.currentUser.username}</Typography>
+              <Typography>Hello, {currentUser.username}</Typography>
               <Button type="submit" onClick={props.logout} variant="contained">
                 Logout
               </Button>

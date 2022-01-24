@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Coin from "./Coin";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
@@ -9,8 +9,10 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import Search from "./Search";
 import "../cryptolist.css";
+import { UserContext } from "../routes/Home";
 
 export default function CryptoList(propss) {
+  const { login, logout, currentUser } = useContext(UserContext);
   const [coins, setCoins] = useState([]);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function CryptoList(propss) {
             price={coin.current_price}
             market={coin.market_cap}
             priceChange={coin.price_change_percentage_24h}
-            currentUser={propss.currentUser}
+            currentUser={currentUser}
           />
         );
       });
@@ -88,6 +90,8 @@ export default function CryptoList(propss) {
         >
           {renderRow}
         </FixedSizeList>
+
+        {/* <h1>{currentUser.username}</h1> */}
       </Box>
     </div>
   );
