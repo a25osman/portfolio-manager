@@ -101,14 +101,15 @@ module.exports = (db) => {
                   arrayDate <= lastDateEntry
                 ) {
                   if (arrayDate >= date) {
-                    results[coin_list[coin]][coin][
-                      arrayDate.toLocaleDateString("en-US")
-                    ][1] += qty;
+                    results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][1] += qty;
+                    let qty1 = results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][1]
+                    let price = results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][0]
+                    results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][2] = qty1 * price
                     listDates.push(arrayDate.toLocaleDateString("en-US"));
                   } else if (arrayDate < date) {
                     results[coin_list[coin]][coin][
                       arrayDate.toLocaleDateString("en-US")
-                    ] = [array[1], qty];
+                    ] = [array[1], qty, array[1] * qty];
                   }
                 }
               }
@@ -122,7 +123,7 @@ module.exports = (db) => {
                   "en-US"
                 );
                 const arrayPrice = array[1];
-                data[coin][arrayDate] = [arrayPrice, qty];
+                data[coin][arrayDate] = [arrayPrice, qty, arrayPrice * qty];
               }
               results.push(data);
               counter++;
@@ -137,6 +138,7 @@ module.exports = (db) => {
             today.toLocaleDateString("en-US")
           ];
         }
+        
         res.json(results);
       })
       .catch((err) => console.log(err));
@@ -169,6 +171,7 @@ module.exports = (db) => {
           qty: 0,
           price: null,
           asset_id: obj.asset_id,
+          date: null
         };
       }
       axios
@@ -189,6 +192,7 @@ module.exports = (db) => {
             const firstprice = obj[coin][firstDate][0];
             init[coin].qty = firstqty;
             init[coin].price = firstprice;
+            init[coin].date = firstDate;
           }
           // for (let key in inventory) {
           //   if (inventory[key][1] === 0) {
