@@ -8,7 +8,7 @@ const UserTransactions = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/transactions/dsanders/1`)
+      .get(`http://localhost:3001/api/transactions/dsanders`)
       .then((res) => {
         setTransactions(res.data);
       });
@@ -16,7 +16,7 @@ const UserTransactions = () => {
 
   const transactionDelete = () => {
     axios
-      .post(`http://localhost:3001/api/transactions/1/delete`)
+      .post(`http://localhost:3001/api/transactions/2/delete`)
       .then((res) => {
         console.log(res.data);
       });
@@ -50,7 +50,7 @@ const UserTransactions = () => {
                   <td>
                     <Button
                       type="submit"
-                      onClick={transactionDelete}
+                      onClick={transactionDelete(()=>{transaction.id})} 
                       variant="contained"
                     >
                       Delete

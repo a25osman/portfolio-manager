@@ -17,6 +17,20 @@ module.exports = (db) => {
       })
       .catch (err => console.log(err));
   });
+// GET /api/transactions/:username get all the transactions for a specific user 
+  router.get("/:username", (req, res) => {
+    db.query(`
+    SELECT assets.coin_name, assets.coin_symbol, transactions.*, to_char(transactions.date_transaction,'MM/DD/YYYY') As date
+    FROM users
+    JOIN assets ON assets.user_id = users.id
+    JOIN transactions ON transactions.asset_id = assets.id 
+    WHERE users.username = $1;
+    `, [req.params.username])
+      .then(data => {
+        res.json(data.rows)
+      })
+      .catch (err => console.log(err));
+  });
 
   // POST /api/transactions/:username/:asset_id
   router.post("/:asset_id", (req, res) => {
