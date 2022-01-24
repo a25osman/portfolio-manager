@@ -31,6 +31,7 @@ module.exports = (db) => {
       [req.params.username]
     )
       .then((data1) => {
+        console.log("This is the post route:", data1.rows)
         const id = data1.rows[0].id;
         const coin = req.body.coin;
         const coin_symbol = req.body.coin_symbol;

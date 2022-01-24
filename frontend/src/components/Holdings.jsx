@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import { FixedSizeList } from "react-window";
+import { UserContext  } from "../App";
 
 export default function Holdings(props) {
   const [crypto, setCrypto] = useState([]);
+  
+  const {
 
+    currentUser
+  
+  } = useContext(UserContext);
+  
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/portfolio/dsanders/inventory`)
+      .get(`http://localhost:3001/api/portfolio/${currentUser.username}/inventory`)
       .then((res) => {
         const dataArray = [];
         for (const key in res.data.timePeriodEnd) {

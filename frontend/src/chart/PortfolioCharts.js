@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
+  const [loading,setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
       .then((res) => {
@@ -70,6 +73,7 @@ const PortfolioCharts = (props) => {
             }
 
             setChart({ labels: xvalues, data: yvalues });
+            setLoading(false);
           })
           .catch((err) => console.log(err));
       });
@@ -139,11 +143,11 @@ const PortfolioCharts = (props) => {
     return function destory() {
       myChart.destroy();
     };
-  }, [chart]);
+  }, [chart,loading]);
 
   return (
     <div>
-      <canvas id="myChart"></canvas>
+     { loading ? <CircularProgress /> : <canvas id="myChart"></canvas> }
     </div>
   );
 };

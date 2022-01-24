@@ -7,7 +7,7 @@ const UserTransactions = () => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/transactions/dsanders`).then((res) => {
+    axios.get(`http://localhost:3001/api/transactions/ljefferson`).then((res) => {
       setTransactions(res.data);
     });
   }, []);

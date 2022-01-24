@@ -15,6 +15,7 @@ import Holdings from "../components/Holdings";
 import UserTransactions from "../components/UserTransactions";
 import { UserContext } from "../App";
 
+
 const Portfolio = (props) => {
   const { state } = useLocation();
   const { user } = state;
@@ -46,12 +47,13 @@ const Portfolio = (props) => {
         className="portfolio"
         sx={{
           width: "100%",
-          height: 400,
+          height: 2000,
           maxWidth: 1050,
           bgcolor: "background.paper",
         }}
       >
-        <PortfolioCharts currentUser={user.username} />
+
+        <PortfolioCharts currentUser={user.username}  />
         <Holdings />
         <UserTransactions />
       </Box>
