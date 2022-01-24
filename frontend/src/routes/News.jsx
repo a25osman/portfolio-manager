@@ -15,7 +15,7 @@ const News = () => {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=(crypto AND bitcoin)&from=${d}&sortBy=publishedAt&apiKey=ef200ee90c914524a04e35fdef13fbb7`
+        `https://newsapi.org/v2/everything?q=(crypto)&from=${d}&sortBy=publishedAt&language=en&apiKey=ef200ee90c914524a04e35fdef13fbb7`
       )
       .then((res) => {
         const getNews = res.data.articles;

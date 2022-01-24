@@ -5,7 +5,6 @@ import axios from "axios";
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-  console.log("Current user", props.currentUser);
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
@@ -55,26 +54,22 @@ const PortfolioCharts = (props) => {
             const allDays = getDaysArray(new Date(firstDay), new Date());
             allDays.forEach((date, index) => {
               if (index < allDays.length - 1) {
-
                 xvalues.push(date.toLocaleDateString("en-US"));
                 yvalues.push(0);
               }
-
             });
 
             for (let coin in coins) {
               xvalues.forEach((date, index) => {
                 if (coins[coin][date]) {
-                  const i = xvalues.indexOf(date)
+                  const i = xvalues.indexOf(date);
                   const amt = coins[coin][date][2];
                   yvalues[i] += amt;
                 }
-
               });
             }
 
             setChart({ labels: xvalues, data: yvalues });
-
           })
           .catch((err) => console.log(err));
       });
@@ -105,7 +100,7 @@ const PortfolioCharts = (props) => {
               // For a category axis, the val is the index so the lookup via getLabelForValue is needed
               callback: function (val, index) {
                 // Hide the label of every 2nd dataset
-                return index % 3 === 0 ? this.getLabelForValue(val) : '';
+                return index % 3 === 0 ? this.getLabelForValue(val) : "";
               },
             },
             title: {
