@@ -19,7 +19,7 @@ const GoogleCharts = () => {
       labels: chart.labels,
       datasets: [
         {
-          label: `Search history`,
+          label: `crypto search trend`,
           backgroundColor: "rgb(47, 247, 237)",
           borderColor: "rgb(255, 99, 132)",
           data: chart.data,
