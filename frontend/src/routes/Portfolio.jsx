@@ -51,7 +51,7 @@ const Portfolio = (props) => {
           bgcolor: "background.paper",
         }}
       >
-        <PortfolioCharts currentUser={currentUser.username} />
+        <PortfolioCharts currentUser={user.username} />
         <Holdings />
         <UserTransactions />
       </Box>

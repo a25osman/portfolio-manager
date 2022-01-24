@@ -5,7 +5,7 @@ import axios from "axios";
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-
+  console.log("Current user", props.currentUser);
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
@@ -64,7 +64,7 @@ const PortfolioCharts = (props) => {
                 }
               }
             }
-            console.log (values)
+            console.log(values);
             // PLEASE GRAPHS values --> it is an object and it is not sorted yet
             // PLEASE GRAPHS values --> it is an object and it is not sorted yet
             // PLEASE GRAPHS values --> it is an object and it is not sorted yet
