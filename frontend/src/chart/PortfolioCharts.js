@@ -114,7 +114,7 @@ const PortfolioCharts = (props) => {
               color: "#911",
               font: {
                 family: "Times",
-                size: 20,
+                size: 15,
                 style: "normal",
                 lineHeight: 1.2,
               },
@@ -129,7 +129,7 @@ const PortfolioCharts = (props) => {
               color: "#911",
               font: {
                 family: "Times",
-                size: 20,
+                size: 15,
                 style: "normal",
                 lineHeight: 1.2,
               },
