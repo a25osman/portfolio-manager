@@ -37,7 +37,7 @@ const Portfolio = (props) => {
         }
       });
     });
-  console.log(currentUser);
+
   return (
     <div>
       <NavBar currentUser={user} />
