@@ -53,101 +53,92 @@ const PortfolioCharts = (props) => {
             const xvalues = [];
             const yvalues = [];
             const allDays = getDaysArray(new Date(firstDay), new Date());
-            for (let date of allDays) {
-              xvalues.push(date.toLocaleDateString("en-US"));
-              yvalues.push(0);
-            }
+            allDays.forEach((date, index) => {
+              if (index < allDays.length - 1) {
+
+                xvalues.push(date.toLocaleDateString("en-US"));
+                yvalues.push(0);
+              }
+
+            });
 
             for (let coin in coins) {
-              for (let date of xvalues) {
+              xvalues.forEach((date, index) => {
                 if (coins[coin][date]) {
-                  const index = xvalues.indexOf(date)
+                  const i = xvalues.indexOf(date)
                   const amt = coins[coin][date][2];
-                  yvalues[index] += amt;
+                  yvalues[i] += amt;
                 }
-              }
+
+              });
             }
 
-            for (let i in xvalues) {
-              console.log(xvalues[i], yvalues[i]);
-            }
+            setChart({ labels: xvalues, data: yvalues });
 
-            // //color library for multiple line
-            // const colors = ["red", "blue", "green", "purple"];
-
-            // // building the labels (x-axis) array
-            // const crypto = res.data[0];
-            // const name = Object.keys(crypto)[0];
-            // // something like crypto.bitcoin, we do [name] because the name of the coin is dynamic
-            // const cryptoInformation = crypto[name];
-            // // from the timeframe(the key), re-order to the accending dates
-            // const labels = Object.keys(cryptoInformation).sort((a, b) => a - b);
-
-            // // building the data points (y-axis)
-            // const datasets = res.data.map((crypto, i) => {
-            //   let name = Object.keys(crypto)[0];
-            //   let cryptoInformation = crypto[name];
-            //   cryptoInformation = Object.entries(cryptoInformation).sort((a, b) => {
-            //     return a[0] - b[0];
-            //   });
-
-            //   cryptoInformation = cryptoInformation.map((d) => d[1][0]);
-
-            //   return {
-            //     label: name,
-            //     data: cryptoInformation,
-            //     borderColor: colors[i],
-            //     backgroundColor: colors[i],
-            //   };
-            // });
-
-            // setChart((prev) => {
-            //   return { labels, datasets };
-            // });
           })
           .catch((err) => console.log(err));
       });
   }, []);
 
   useEffect(() => {
+    const data = {
+      labels: chart.labels,
+      datasets: [
+        {
+          label: `My Portfolio`,
+          backgroundColor: "rgb(255, 99, 132)",
+          borderColor: "rgb(255, 99, 132)",
+          data: chart.data,
+        },
+      ],
+    };
+
     const config = {
       type: "line",
-      data: chart,
+      data: data,
       options: {
+        responsive: true,
         scales: {
           x: {
+            display: true,
             ticks: {
               // For a category axis, the val is the index so the lookup via getLabelForValue is needed
               callback: function (val, index) {
                 // Hide the label of every 2nd dataset
-                let label = this.getLabelForValue(val);
-                label = label.split("/");
-                const year = label[2];
-                const month = label[0];
-                //console.log(month);
-                label = "";
-                if (month < 4) {
-                  label = "Q1";
-                } else if (month < 7) {
-                  label = "Q2";
-                } else if (month < 10) {
-                  label = "Q3";
-                } else {
-                  label = "Q4";
-                }
-                label = label + " " + year;
-                return index % 5 === 0 ? label : "";
+                return index % 3 === 0 ? this.getLabelForValue(val) : '';
               },
+            },
+            title: {
+              display: true,
+              text: "Date",
+              color: "#911",
+              font: {
+                family: "Times",
+                size: 20,
+                style: "normal",
+                lineHeight: 1.2,
+              },
+              padding: { top: 20, left: 0, right: 0, bottom: 0 },
             },
           },
           y: {
             display: true,
-            type: "logarithmic",
+            title: {
+              display: true,
+              text: "Price",
+              color: "#911",
+              font: {
+                family: "Times",
+                size: 20,
+                style: "normal",
+                lineHeight: 1.2,
+              },
+              padding: { top: 20, left: 0, right: 0, bottom: 0 },
+            },
           },
         },
       },
     };
-
     const myChart = new Chart(document.getElementById("myChart"), config);
 
     return function destory() {
