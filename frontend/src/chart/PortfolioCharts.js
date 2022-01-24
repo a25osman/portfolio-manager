@@ -50,30 +50,27 @@ const PortfolioCharts = (props) => {
               }
             }
 
-            const values = {};
+            const xvalues = [];
+            const yvalues = [];
             const allDays = getDaysArray(new Date(firstDay), new Date());
             for (let date of allDays) {
-              values[date.toLocaleDateString("en-US")] = 0;
+              xvalues.push(date.toLocaleDateString("en-US"));
+              yvalues.push(0);
             }
 
             for (let coin in coins) {
-              for (let date in values) {
+              for (let date of xvalues) {
                 if (coins[coin][date]) {
+                  const index = xvalues.indexOf(date)
                   const amt = coins[coin][date][2];
-                  values[date] += amt;
+                  yvalues[index] += amt;
                 }
               }
             }
-            console.log(values);
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
-            // PLEASE GRAPHS values --> it is an object and it is not sorted yet
+
+            for (let i in xvalues) {
+              console.log(xvalues[i], yvalues[i]);
+            }
 
             // //color library for multiple line
             // const colors = ["red", "blue", "green", "purple"];
