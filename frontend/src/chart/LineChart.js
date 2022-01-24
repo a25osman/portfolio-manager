@@ -40,7 +40,42 @@ const LineChart = (props) => {
     const config = {
       type: "line",
       data: data,
-      options: {},
+      options: {
+        responsive: true,
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Time',
+          color: '#911',
+          font: {
+            family: 'Times',
+            size: 20,
+            style: 'normal',
+            lineHeight: 1.2
+          },
+          padding: {top: 20, left: 0, right: 0, bottom: 0}
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Price',
+          color: '#911',
+          font: {
+            family: 'Times',
+            size: 20,
+            style: 'normal',
+            lineHeight: 1.2
+          },
+          padding: {top: 20, left: 0, right: 0, bottom: 0}
+        }
+      },
+    }
+
+      },
     };
 
     const myChart = new Chart(document.getElementById("myChart"), config);
