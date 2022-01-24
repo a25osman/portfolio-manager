@@ -61,7 +61,7 @@ const PortfolioCharts = (props) => {
             }
           }
         }
-        
+        console.log(values)
         // PLEASE GRAPHS values --> it is an object and it is not sorted yet
         // PLEASE GRAPHS values --> it is an object and it is not sorted yet
         // PLEASE GRAPHS values --> it is an object and it is not sorted yet
