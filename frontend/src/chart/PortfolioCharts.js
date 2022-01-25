@@ -126,7 +126,7 @@ const PortfolioCharts = (props) => {
             display: true,
             title: {
               display: true,
-              text: "Price",
+              text: "Portfolio Value",
               color: "#911",
               font: {
                 family: "Times",
