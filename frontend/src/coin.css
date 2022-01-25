@@ -10,22 +10,23 @@
   flex-direction: row;
   align-items: center;
   padding: 3em;
+  justify-content: space-between;
 }
 
 .namesymbol {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-.coin-row {
+/* .coin-row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
+} */
 
 .data {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-self: center;
 }
 
@@ -35,9 +36,9 @@ img {
   padding-right: 10px;
 }
 
-.addTo {
+/* .addTo {
   display: flex;
   flex-direction: column;
   align-self: center;
   justify-content: space-between;
-}
+} */

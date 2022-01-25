@@ -75,14 +75,14 @@ export default function CryptoList(propss) {
         sx={{
           width: "100%",
           height: 400,
-          maxWidth: 360,
+          maxWidth: 2000,
           bgcolor: "background.paper",
         }}
       >
         <Search search={handleSearch} />
         <FixedSizeList
           height={600}
-          width={600}
+          width={1400}
           itemSize={115}
           itemCount={1}
           overscanCount={5}

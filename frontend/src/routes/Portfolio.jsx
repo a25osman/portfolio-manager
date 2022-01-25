@@ -46,7 +46,7 @@ const Portfolio = (props) => {
         className="portfolio"
         sx={{
           width: "100%",
-          height: 2000,
+          height: 900,
           maxWidth: 1050,
           bgcolor: "background.paper",
         }}

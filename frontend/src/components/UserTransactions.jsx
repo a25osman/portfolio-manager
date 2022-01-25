@@ -15,6 +15,7 @@ const UserTransactions = (props) => {
   }, []);
 
   const transactionDelete = (transactionid) => {
+    transactionid.preventDefault();
     console.log("Im here");
     axios
       .post(`http://localhost:3001/api/transactions/${transactionid}/delete`)

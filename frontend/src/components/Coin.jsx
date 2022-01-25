@@ -25,6 +25,14 @@ const Coin = ({
   const showChart = () => {
     navigate("viewcrypto", { state: { name, price, currentUser } });
   };
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
   const loginconfig = {
     withCredentials: true,
   };
@@ -52,28 +60,25 @@ const Coin = ({
       <div className="coin-row">
         <div className="coin">
           <img src={image} alt="crypto" onClick={() => showChart()} />
-          <div className="namesymbol">
-            <h1>{name}</h1>
-            <p className="coin-sym">{symbol}</p>
-          </div>
-        </div>
-        <div className="data">
-          <p className="price">${price}</p>
-          {/* <p className="mrk-cap">${}</p> */}
+          <br></br>
+          <h1>{name}</h1>
+          <p className="coin-sym">{symbol.toUpperCase()}</p>
+          <p className="price">{formatter.format(price)}</p>
           {priceChange > 0 ? (
             <p className="priceChange green">{priceChange}%</p>
           ) : (
             <p className="priceChange red">{priceChange}%</p>
           )}
-        </div>
-        {currentUser && (
-          <div className="addTo">
+          <p className="mrk-cap">Mkt Cap:{formatter.format(market)}</p>
+          {currentUser && (
             <Button onClick={() => addToPortfolio()} variant="contained">
               Add to Portfolio
             </Button>
-            {/* <Button variant="contained">Add to Favorites</Button> */}
-          </div>
-        )}
+          )}
+        </div>
+        <p>
+          _____________________________________________________________________________________________________________________________________________________________
+        </p>
       </div>
     </div>
   );
