@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
-import { Line } from "react-chartjs-2";
+import { format, compareAsc } from 'date-fns'
 import axios from "axios";
 
 const LineChart = (props) => {
@@ -16,7 +16,7 @@ const LineChart = (props) => {
         const labels = [];
         const prices = [];
         getGraph.map((x) => {
-          labels.push(x[0]);
+          labels.push(format(new Date(x[0]), 'LLL/dd/yyyy'));
           prices.push(x[1]);
         });
         setChart({ labels: labels, data: prices });
@@ -33,6 +33,7 @@ const LineChart = (props) => {
           backgroundColor: "rgb(255, 99, 132)",
           borderColor: "rgb(255, 99, 132)",
           data: chart.data,
+          pointRadius: 0,
         },
       ],
     };
@@ -45,6 +46,13 @@ const LineChart = (props) => {
         scales: {
           x: {
             display: true,
+            ticks: {
+              // For a category axis, the val is the index so the lookup via getLabelForValue is needed
+              callback: function (val, index) {
+                // Hide the label of every 2nd dataset
+                return index % 2 === 0 ? this.getLabelForValue(val) : "";
+              },
+            },
             title: {
               display: true,
               text: "Time",

@@ -88,6 +88,7 @@ const PortfolioCharts = (props) => {
           backgroundColor: "rgb(255, 99, 132)",
           borderColor: "rgb(255, 99, 132)",
           data: chart.data,
+          pointRadius: 0,  
         },
       ],
     };
