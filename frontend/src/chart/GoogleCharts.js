@@ -15,14 +15,28 @@ const GoogleCharts = () => {
   }, []);
 
   useEffect(() => {
+    var ctx = document.getElementById("myChart").getContext("2d");
+    /*** Gradient ***/
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(250,174,50,1)');
+    gradient.addColorStop(1, 'rgba(250,174,50,0)');
     const data = {
       labels: chart.labels,
       datasets: [
         {
           label: `crypto search trend`,
-          backgroundColor: "rgb(47, 247, 237)",
-          borderColor: "rgb(255, 99, 132)",
           data: chart.data,
+          backgroundColor: gradient,
+          borderColor: "rgb(255, 99, 132)",
+          pointRadius: 0,
+          fill: true,
+          fillTarget: gradient, // Put the gradient here as a fill color                     
+          strokeColor: "#ff6c23",
+          pointColor: "#fff",
+          pointStrokeColor: "#ff6c23",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "#ff6c23",
+
         },
       ],
     };
@@ -58,7 +72,7 @@ const GoogleCharts = () => {
             style: 'normal',
             lineHeight: 1.2
           },
-          padding: {top: 20, left: 0, right: 0, bottom: 0}
+          padding: {top: 20, left: 0, right: 0, bottom: 0}, 
         }
       },
       },
