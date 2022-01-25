@@ -73,7 +73,7 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <h1>Tradeable Assets</h1>
+      <h1 className="news_title">Tradeable Assets</h1>
       <div className="cryptolist">
         <CryptoList />
       </div>

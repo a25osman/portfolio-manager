@@ -8,6 +8,8 @@ import Favorties from "../routes/Favorites";
 import { userContext } from "./NavBar";
 import { useContext } from "react";
 import { Typography } from "@mui/material";
+import "../css/Newscss.css";
+
 import axios from "axios";
 
 const Coin = ({
