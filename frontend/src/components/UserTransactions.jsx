@@ -3,13 +3,15 @@ import { useEffect } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-const UserTransactions = () => {
+const UserTransactions = (props) => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/transactions/ljefferson`).then((res) => {
-      setTransactions(res.data);
-    });
+    axios
+      .get(`http://localhost:3001/api/transactions/${props.currentUser}`)
+      .then((res) => {
+        setTransactions(res.data);
+      });
   }, []);
 
   const transactionDelete = (transactionid) => {

@@ -15,7 +15,6 @@ import Holdings from "../components/Holdings";
 import UserTransactions from "../components/UserTransactions";
 import { UserContext } from "../App";
 
-
 const Portfolio = (props) => {
   const { state } = useLocation();
   const { user } = state;
@@ -52,10 +51,9 @@ const Portfolio = (props) => {
           bgcolor: "background.paper",
         }}
       >
-
-        <PortfolioCharts currentUser={user.username}  />
-        <Holdings />
-        <UserTransactions />
+        <PortfolioCharts currentUser={user.username} />
+        <Holdings currentUser={user.username} />
+        <UserTransactions currentUser={user.username} />
       </Box>
     </div>
   );
