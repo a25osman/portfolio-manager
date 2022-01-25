@@ -25,15 +25,27 @@ const LineChart = (props) => {
       });
   }, []);
   useEffect(() => {
+    var ctx = document.getElementById("myChart").getContext("2d");
+    /*** Gradient ***/
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(250,174,50,1)');
+    gradient.addColorStop(1, 'rgba(250,174,50,0)');
     const data = {
       labels: chart.labels,
       datasets: [
         {
           label: `${props.name}`,
-          backgroundColor: "rgb(255, 99, 132)",
-          borderColor: "rgb(255, 99, 132)",
           data: chart.data,
+          backgroundColor: gradient,
+          borderColor: "rgb(255, 99, 132)",
           pointRadius: 0,
+          fill: true,
+          fillTarget: gradient, // Put the gradient here as a fill color                     
+          strokeColor: "#ff6c23",
+          pointColor: "#fff",
+          pointStrokeColor: "#ff6c23",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "#ff6c23",
         },
       ],
     };

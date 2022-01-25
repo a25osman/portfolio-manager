@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
   const [loading,setLoading] = useState(false);
+  
   useEffect(() => {
     setLoading(true);
     axios
