@@ -6,6 +6,10 @@ import { FixedSizeList } from "react-window";
 import { UserContext } from "../App";
 
 export default function Holdings(props) {
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   const [crypto, setCrypto] = useState([]);
 
   const { currentUser } = useContext(UserContext);
@@ -29,7 +33,8 @@ export default function Holdings(props) {
         <td>{coinObj.coin_name}</td>
         <td>{coinObj.coin_symbol}</td>
         <td>{coinObj.qty}</td>
-        <td>{coinObj.price}</td>
+        <td>{formatter.format(coinObj.price)}</td>
+        <td>{formatter.format(coinObj.price * coinObj.qty)}</td>
       </tr>
     );
   });
@@ -43,6 +48,7 @@ export default function Holdings(props) {
             <th>Symbol</th>
             <th>Qty</th>
             <th>Price</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>{table}</tbody>

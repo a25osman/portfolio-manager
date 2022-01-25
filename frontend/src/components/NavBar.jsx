@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { UserContext } from "../App";
+import "../App.css";
 
 export default function NavBar(props) {
   const {
@@ -101,6 +102,7 @@ export default function NavBar(props) {
           </Box>
           {!currentUser && (
             <Box
+              className="loginnav"
               component="form"
               sx={{
                 "& .MuiTextField-root": { m: 1, width: "25ch" },

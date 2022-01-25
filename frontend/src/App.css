@@ -61,3 +61,8 @@
   flex-direction: row;
 } */
 }
+
+.loginnav {
+  display: flex;
+  flex-direction: row;
+}
