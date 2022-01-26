@@ -24,7 +24,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>New-Transaction</Button>
       <Modal
         open={open}
         onClose={handleClose}

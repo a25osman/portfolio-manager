@@ -58,7 +58,7 @@ const Portfolio = (props) => {
       <CssBaseline />
       <NavBar currentUser={user} />
       <Container>
-        <Typography variant="h2" align="left" color="textPrimary" gutterBottom>
+        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
           Dashboard
         </Typography>
         <PortfolioCharts currentUser={user.username} />
