@@ -13,9 +13,24 @@ import axios from "axios";
 import PortfolioCharts from "../chart/PortfolioCharts";
 import Holdings from "../components/Holdings";
 import UserTransactions from "../components/UserTransactions";
+import BasicModal from "../components/BasicModal";
+
 import { UserContext } from "../App";
+import {Typography, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container} from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles ( theme => ({
+  container: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6)
+  }
+}));
+
 
 const Portfolio = (props) => {
+
+  const classes = useStyles();
+
   const { state } = useLocation();
   const { user } = state;
   const { login, logout, currentUser } = useContext(UserContext);
@@ -39,23 +54,35 @@ const Portfolio = (props) => {
     });
 
   return (
-    <div>
+    <>
+      <CssBaseline />
       <NavBar currentUser={user} />
-      <h2>Current Holdings</h2>
-      <Box
-        className="portfolio"
-        sx={{
-          width: "100%",
-          height: 900,
-          maxWidth: 1050,
-          bgcolor: "background.paper",
-        }}
-      >
+      <Container>
+        <Typography variant="h2" align="left" color="textPrimary" gutterBottom>
+          Dashboard
+        </Typography>
         <PortfolioCharts currentUser={user.username} />
         <Holdings currentUser={user.username} />
-        <UserTransactions currentUser={user.username} />
-      </Box>
-    </div>
+        <BasicModal />
+      </Container>
+    </>
+    // <div>
+      
+    //   {/* <h2>Current Holdings</h2> */}
+    //   <Box
+    //     // className="portfolio"
+    //     // sx={{
+    //     //   width: "100%",
+    //     //   height: 900,
+    //     //   maxWidth: 1050,
+    //     //   bgcolor: "background.paper",
+    //     // }}
+    //   >
+    //     {/* <PortfolioCharts currentUser={user.username} /> */}
+        // <Holdings currentUser={user.username} />
+    //     <UserTransactions currentUser={user.username} />
+    //   </Box>
+    // </div>
   );
 };
 
