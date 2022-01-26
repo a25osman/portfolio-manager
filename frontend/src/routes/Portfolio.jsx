@@ -63,7 +63,7 @@ const Portfolio = (props) => {
         </Typography>
         <PortfolioCharts currentUser={user.username} />
         <Holdings currentUser={user.username} />
-        <BasicModal />
+        <BasicModal currentUser={user.username} />
       </Container>
     </>
     // <div>

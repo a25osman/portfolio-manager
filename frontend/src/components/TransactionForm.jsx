@@ -6,6 +6,7 @@ import {Button, InputLabel, Select, MenuItem, FormControl} from '@mui/material';
 
 
 export const TransactionForm = (props) => {
+  
   const [qty, setQty] = useState("");
   const [exchange_symbol, setSymbol] = useState("");
   const [exchange_value, setValue] = useState("");
@@ -16,7 +17,7 @@ export const TransactionForm = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/portfolio/${"dsanders"}/inventory`)
+      .get(`http://localhost:3001/api/portfolio/${props.currentUser}/inventory`)
       .then((res) => {
         const dataArray = [];
         for (const key in res.data.timePeriodEnd) {
@@ -39,7 +40,7 @@ export const TransactionForm = (props) => {
     console.log("is it empty????", item, qty, exchange_symbol, exchange_value, date)
     axios
       .post(
-        `http://localhost:3001/api/transactions/${'dsanders'}/${item}`,
+        `http://localhost:3001/api/transactions/${props.currentUser}/${item}`,
         {qty, exchange_value, exchange_symbol, date},
         {withCredentials: true}
       )
