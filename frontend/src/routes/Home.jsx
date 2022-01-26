@@ -16,6 +16,7 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useState("null");
   const [errorCheck, setErrorCheck] = useState(null);
 
+
   const ErrorMessage = () => {
     return (
       <div>

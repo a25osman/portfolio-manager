@@ -1,13 +1,15 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import {
+
   Button,
   InputLabel,
   Select,
   MenuItem,
   FormControl,
+  Stack,
 } from "@mui/material";
 
 export const TransactionForm = (props) => {
@@ -56,52 +58,58 @@ export const TransactionForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <InputLabel id="crypto">Cryptocoin</InputLabel>
-      <Select label="Crypto" labelId="crypto" id="cryptos" value={item} onChange={event => setItem(event.target.value)}>
-        {options}
-      </Select> */}
+      <Stack spacing={2}>
+        <Typography variant="h5" align="center" gutterBottom="true"> Transaction Form </Typography>
 
-      <Select
-        id="crypto"
-        value={item}
-        onChange={(event) => setItem(event.target.value)}
-      >
-        {options}
-      </Select>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Coin</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Coin"
 
-      <TextField
-        id="outlined-basic"
-        label="Quantity"
-        variant="outlined"
-        value={qty}
-        onChange={(event) => setQty(event.target.value)}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Trading Pair"
-        variant="outlined"
-        value={exchange_symbol}
-        onChange={(event) => setSymbol(event.target.value)}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Value"
-        variant="outlined"
-        value={exchange_value}
-        onChange={(event) => setValue(event.target.value)}
-      />
+            value={item}
+            onChange={(event) => setItem(event.target.value)}
+          >
+            {options}
+          </Select>
 
-      <TextField
-        id="outlined-basic"
-        label="Transaction Date"
-        variant="outlined"
-        value={date}
-        onChange={(event) => setDate(event.target.value)}
-      />
+        </FormControl>
 
-      <Button type="submit" variant="contained">
-        Submit!
-      </Button>
+        <TextField
+          id="outlined-basic"
+          label="Quantity"
+          variant="outlined"
+          value={qty}
+          onChange={(event) => setQty(event.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Trading Pair"
+          variant="outlined"
+          value={exchange_symbol}
+          onChange={(event) => setSymbol(event.target.value)}
+        />
+        <TextField
+          id="outlined-basic"
+          label="Value"
+          variant="outlined"
+          value={exchange_value}
+          onChange={(event) => setValue(event.target.value)}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Transaction Date"
+          variant="outlined"
+          value={date}
+          onChange={(event) => setDate(event.target.value)}
+        />
+
+        <Button type="submit" variant="contained">
+          Submit!
+        </Button>
+      </Stack>
     </form>
   );
 };
