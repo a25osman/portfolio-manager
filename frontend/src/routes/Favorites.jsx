@@ -24,7 +24,7 @@ export default function Favorties() {
         <Box
           sx={{
             width: "100%",
-            height: 200,
+            height: 50,
             maxWidth: 1050,
             bgcolor: "background.paper",
           }}

@@ -15,3 +15,9 @@
   font-style: oblique;
   font-size: 50px;
 }
+
+.centergraph {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
