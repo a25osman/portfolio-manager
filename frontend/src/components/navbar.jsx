@@ -109,7 +109,7 @@ export default function NavBar(props) {
               }}
               noValidate
               autoComplete="off"
-              action="/news"
+              action="/"
             >
               <TextField
                 id="outlined-required"

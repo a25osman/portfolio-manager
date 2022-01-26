@@ -1,0 +1,17 @@
+.favoritepage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+.trendssearch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.googleHeading {
+  font-family: "Times New Roman", Times, serif;
+  font-style: oblique;
+  font-size: 50px;
+}
