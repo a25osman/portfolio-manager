@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import GoogleCharts from "../chart/GoogleCharts";
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
 import PortfolioCharts from "../chart/PortfolioCharts";
 import UserTransactions from "../components/UserTransactions";
 import { Box } from "@mui/system";

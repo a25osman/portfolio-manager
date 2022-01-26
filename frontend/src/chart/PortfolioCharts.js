@@ -6,8 +6,8 @@ import { CircularProgress } from "@mui/material";
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-  const [loading,setLoading] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -81,15 +81,28 @@ const PortfolioCharts = (props) => {
   }, []);
 
   useEffect(() => {
+    var ctx = document.getElementById("myChart").getContext("2d");
+    /*** Gradient ***/
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(250,174,50,1)');
+    gradient.addColorStop(1, 'rgba(250,174,50,0)');
     const data = {
       labels: chart.labels,
       datasets: [
         {
-          label: `My Portfolio`,
-          backgroundColor: "rgb(255, 99, 132)",
-          borderColor: "rgb(255, 99, 132)",
+          label: `Portfolio Value`,
           data: chart.data,
-          pointRadius: 0,  
+          pointRadius: 0,
+          backgroundColor: gradient,
+          borderColor: "rgb(255, 99, 132)",
+          pointRadius: 0,
+          fill: true,
+          fillTarget: gradient, // Put the gradient here as a fill color                     
+          strokeColor: "#ff6c23",
+          pointColor: "#fff",
+          pointStrokeColor: "#ff6c23",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "#ff6c23",
         },
       ],
     };
@@ -98,6 +111,19 @@ const PortfolioCharts = (props) => {
       type: "line",
       data: data,
       options: {
+        plugins: {
+          title: {
+              display: true,
+              text: 'Your Portfolio ',
+              font: {
+                family: "Roboto",
+                size: 30,
+                style: "normal",
+                lineHeight: 1.2,
+              },
+              align:"start",
+          }
+      },
         responsive: true,
         scales: {
           x: {
@@ -106,35 +132,42 @@ const PortfolioCharts = (props) => {
               // For a category axis, the val is the index so the lookup via getLabelForValue is needed
               callback: function (val, index) {
                 // Hide the label of every 2nd dataset
-                return index % 3 === 0 ? this.getLabelForValue(val) : "";
+                return index % 5 === 0 ? this.getLabelForValue(val) : "";
               },
+            },
+            grid:{
+              display:false,
+              
             },
             title: {
               display: true,
-              text: "Date",
               color: "#911",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
                 style: "normal",
                 lineHeight: 1.2,
               },
-              padding: { top: 20, left: 0, right: 0, bottom: 0 },
+              padding: { top: 0, left: 0, right: 0, bottom: 0 },
             },
           },
           y: {
             display: true,
+            ticks: {
+              callback: function (value, index, ticks) {
+                return '$' + value;
+              }
+            },
             title: {
               display: true,
-              text: "Portfolio Value",
               color: "#911",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
                 style: "normal",
                 lineHeight: 1.2,
               },
-              padding: { top: 20, left: 0, right: 0, bottom: 0 },
+              padding: { top: 0, left: 0, right: 0, bottom: 0 },
             },
           },
         },
@@ -145,11 +178,12 @@ const PortfolioCharts = (props) => {
     return function destory() {
       myChart.destroy();
     };
-  }, [chart,loading]);
+  }, [chart, loading]);
 
   return (
     <div>
-     { loading ? <CircularProgress /> : <canvas id="myChart"></canvas> }
+      {/* { loading ? <CircularProgress /> : <canvas id="myChart"></canvas> } */}
+      <canvas id="myChart"></canvas>
     </div>
   );
 };

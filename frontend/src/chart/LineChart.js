@@ -21,7 +21,7 @@ const LineChart = (props) => {
         });
         setChart({ labels: labels, data: prices });
         console.log(getGraph);
-        console.log("LABELS-----", labels);
+        console.log("LABELS-----", prices);
       });
   }, []);
   useEffect(() => {
@@ -62,15 +62,19 @@ const LineChart = (props) => {
               // For a category axis, the val is the index so the lookup via getLabelForValue is needed
               callback: function (val, index) {
                 // Hide the label of every 2nd dataset
-                return index % 2 === 0 ? this.getLabelForValue(val) : "";
+                return index % 5 === 0 ? this.getLabelForValue(val) : "";
               },
+            },
+            grid:{
+              display:false,
+              
             },
             title: {
               display: true,
               text: "Time",
               color: "#911",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 20,
                 style: "normal",
                 lineHeight: 1.2,
@@ -80,12 +84,17 @@ const LineChart = (props) => {
           },
           y: {
             display: true,
+            ticks:{
+              callback: function(value, index, ticks) {
+                return '$' + value;
+            }
+            },
             title: {
               display: true,
               text: "Price",
               color: "#911",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 20,
                 style: "normal",
                 lineHeight: 1.2,

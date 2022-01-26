@@ -56,34 +56,63 @@ const GoogleCharts = () => {
       type: "line",
       data: data,
       options: {
+        plugins: {
+          legend: {
+              labels: {
+                  // This more specific font property overrides the global property
+                  font: {
+                      size: 15
+                  }
+              }
+          }
+      },
         responsive: true,
         scales: {
           x: {
             display: true,
+            ticks: {
+              font: {
+                size: 14,
+              },
+              // For a category axis, the val is the index so the lookup via getLabelForValue is needed
+              callback: function (val, index) {
+                // Hide the label of every 2nd dataset
+                return index % 5 === 0 ? this.getLabelForValue(val) : "";
+              },
+            },
+            grid:{
+              display:false,
+              
+            },
             title: {
               display: true,
-              text: "Dates",
               font: {
-                family: "Times",
-                size: 20,
+                family: "Roboto",
+                size: 30,
                 style: "normal",
                 lineHeight: 1.2,
               },
-              padding: { top: 20, left: 0, right: 0, bottom: 0 },
             },
           },
           y: {
             display: true,
+            ticks: {
+              font: {
+                size: 14,
+              },
+              callback: function (value, index, ticks) {
+                return value + "%";
+              }
+            },
             title: {
               display: true,
-              text: "popularity percentage",
               font: {
-                family: "Dates",
-                size: 20,
+                family: "Roboto",
+                size: 30,
                 style: "normal",
                 lineHeight: 1.2,
               },
-              padding: { top: 20, left: 0, right: 0, bottom: 0 },
+              
             },
           },
         },
