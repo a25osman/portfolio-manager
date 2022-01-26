@@ -16,19 +16,27 @@ import UserTransactions from "../components/UserTransactions";
 import BasicModal from "../components/BasicModal";
 
 import { UserContext } from "../App";
-import {Typography, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container} from '@material-ui/core';
+import {
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CssBaseline,
+  Grid,
+  Toolbar,
+  Container,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles ( theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6)
-  }
+    padding: theme.spacing(8, 0, 6),
+  },
 }));
 
-
 const Portfolio = (props) => {
-
   const classes = useStyles();
 
   const { state } = useLocation();
@@ -58,7 +66,13 @@ const Portfolio = (props) => {
       <CssBaseline />
       <NavBar currentUser={user} />
       <Container>
-        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+        <Typography
+          className="news_title"
+          variant="h2"
+          align="center"
+          color="textPrimary"
+          gutterBottom
+        >
           Dashboard
         </Typography>
         <PortfolioCharts currentUser={user.username} />
@@ -67,7 +81,7 @@ const Portfolio = (props) => {
       </Container>
     </>
     // <div>
-      
+
     //   {/* <h2>Current Holdings</h2> */}
     //   <Box
     //     // className="portfolio"
@@ -79,7 +93,7 @@ const Portfolio = (props) => {
     //     // }}
     //   >
     //     {/* <PortfolioCharts currentUser={user.username} /> */}
-        // <Holdings currentUser={user.username} />
+    // <Holdings currentUser={user.username} />
     //     <UserTransactions currentUser={user.username} />
     //   </Box>
     // </div>
