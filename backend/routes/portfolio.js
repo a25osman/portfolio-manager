@@ -31,7 +31,6 @@ module.exports = (db) => {
       [req.params.username]
     )
       .then((data1) => {
-        console.log("This is the post route:", data1.rows)
         const id = data1.rows[0].id;
         const coin = req.body.coin;
         const coin_symbol = req.body.coin_symbol;
@@ -74,7 +73,7 @@ module.exports = (db) => {
     )
       .then(async (data) => {
         // res.json(data.rows)
-
+        console.log(data.rows);
         for (let i in data.rows) {
           const coin = data.rows[i].coin_name;
           const qty = data.rows[i].quantity;
@@ -102,10 +101,20 @@ module.exports = (db) => {
                   arrayDate <= lastDateEntry
                 ) {
                   if (arrayDate >= date) {
-                    results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][1] += qty;
-                    let qty1 = results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][1]
-                    let price = results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][0]
-                    results[coin_list[coin]][coin][arrayDate.toLocaleDateString("en-US")][2] = qty1 * price
+                    results[coin_list[coin]][coin][
+                      arrayDate.toLocaleDateString("en-US")
+                    ][1] += qty;
+                    let qty1 =
+                      results[coin_list[coin]][coin][
+                        arrayDate.toLocaleDateString("en-US")
+                      ][1];
+                    let price =
+                      results[coin_list[coin]][coin][
+                        arrayDate.toLocaleDateString("en-US")
+                      ][0];
+                    results[coin_list[coin]][coin][
+                      arrayDate.toLocaleDateString("en-US")
+                    ][2] = qty1 * price;
                     listDates.push(arrayDate.toLocaleDateString("en-US"));
                   } else if (arrayDate < date) {
                     results[coin_list[coin]][coin][
@@ -139,7 +148,7 @@ module.exports = (db) => {
             today.toLocaleDateString("en-US")
           ];
         }
-        
+
         res.json(results);
       })
       .catch((err) => console.log(err));
@@ -160,19 +169,19 @@ module.exports = (db) => {
     ).then((data) => {
       for (let obj of data.rows) {
         inventory[obj.coin_name] = {
-          coin_name : obj.coin_name,
+          coin_name: obj.coin_name,
           coin_symbol: obj.coin_symbol,
           qty: 0,
           price: null,
           asset_id: obj.asset_id,
         }; //sym, qty, price, id
         init[obj.coin_name] = {
-          coin_name : obj.coin_name,
+          coin_name: obj.coin_name,
           coin_symbol: obj.coin_symbol,
           qty: 0,
           price: null,
           asset_id: obj.asset_id,
-          date: null
+          date: null,
         };
       }
       axios
