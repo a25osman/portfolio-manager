@@ -5,9 +5,9 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import { red } from "@mui/material/colors";
 
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 
   // These options are needed to round to whole numbers if that's what you want.
   //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
@@ -16,10 +16,10 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-  const [finish, setFinish]= useState(0);
-  const [start,setStart]= useState(0);
-  useEffect(() => {
+  const [finish, setFinish] = useState(0);
+  const [start, setStart] = useState(0);
 
+  useEffect(() => {
     axios
       .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
       .then((res) => {
@@ -49,8 +49,8 @@ const PortfolioCharts = (props) => {
             let end = 0;
             const obj2 = resp.data.timePeriodEnd;
             for (let key in coinObj) {
-              initial += coinObj[key].qty * coinObj[key].price
-              end += obj2[key].qty * obj2[key].price
+              initial += coinObj[key].qty * coinObj[key].price;
+              end += obj2[key].qty * obj2[key].price;
 
               const currentDate = coinObj[key].date;
 
@@ -60,7 +60,7 @@ const PortfolioCharts = (props) => {
                 }
               }
             }
-            console.log("..................",initial,end)
+            console.log("..................", initial, end);
             setStart(initial);
             setFinish(end);
 
@@ -101,8 +101,8 @@ const PortfolioCharts = (props) => {
     var ctx = document.getElementById("myChart").getContext("2d");
     /*** Gradient ***/
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(250,174,50,1)');
-    gradient.addColorStop(1, 'rgba(250,174,50,0)');
+    gradient.addColorStop(0, "rgba(250,174,50,1)");
+    gradient.addColorStop(1, "rgba(250,174,50,0)");
     const data = {
       labels: chart.labels,
       datasets: [
@@ -114,7 +114,7 @@ const PortfolioCharts = (props) => {
           borderColor: "rgb(255, 99, 132)",
           pointRadius: 0,
           fill: true,
-          fillTarget: gradient, // Put the gradient here as a fill color                     
+          fillTarget: gradient, // Put the gradient here as a fill color
           strokeColor: "#ff6c23",
           pointColor: "#fff",
           pointStrokeColor: "#ff6c23",
@@ -130,18 +130,24 @@ const PortfolioCharts = (props) => {
       options: {
         plugins: {
           title: {
-              display: true,
-              text: [`Your Portfolio (${formatter.format(finish)})`,((finish - start)/(start))*100],
-              font: {
-                family: "Roboto",
-                size: 30,
-                style: "normal",
-                lineHeight: 1.2,
-              },
-              color:"red",
-              align:"start",
-          }
-      },
+            display: true,
+            text: start
+              ? `${formatter.format(finish)}  (${Math.round(
+                  ((finish - start) / start) * 100
+                )}%)`
+              : ``,
+
+            font: {
+              family: "Roboto",
+              size: 30,
+              style: "normal",
+              lineHeight: 1.2,
+            },
+            color:
+              finish >= start ? (finish == start ? "black" : "green") : "red",
+            align: "start",
+          },
+        },
         responsive: true,
         scales: {
           x: {
@@ -153,9 +159,8 @@ const PortfolioCharts = (props) => {
                 return index % 5 === 0 ? this.getLabelForValue(val) : "";
               },
             },
-            grid:{
-              display:false,
-              
+            grid: {
+              display: false,
             },
             title: {
               display: true,
@@ -173,8 +178,8 @@ const PortfolioCharts = (props) => {
             display: true,
             ticks: {
               callback: function (value, index, ticks) {
-                return '$' + value;
-              }
+                return "$" + value;
+              },
             },
             title: {
               display: true,
@@ -196,7 +201,7 @@ const PortfolioCharts = (props) => {
     return function destory() {
       myChart.destroy();
     };
-  }, [chart,start]);
+  }, [chart, start]);
 
   return (
     <div>

@@ -1,4 +1,9 @@
-import { Container, getBottomNavigationActionUtilityClass, Grid, Typography } from "@mui/material";
+import {
+  Container,
+  getBottomNavigationActionUtilityClass,
+  Grid,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
@@ -8,7 +13,6 @@ import { useLocation } from "react-router";
 import { UserContext } from "./Home";
 import { ClassNames } from "@emotion/react";
 import { margin, padding } from "@mui/system";
-
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -45,21 +49,36 @@ const News = () => {
       <NavBar />
 
       {/* <div className="news_parent">{articles}</div> */}
-      <Container sx={{
-          bgcolor: 'background.paper',
+      <Container
+        sx={{
+          bgcolor: "background.paper",
           padding: "10px",
-          marginTop: "10px"
-      }} maxWidth="lg">
-         {/* <h1 className="news_title">Crypto News</h1> */}
-         <Container maxWidth='sm' gutterBottom sx={{marginBottom:"10px"}}>
-           <Typography variant="h2" align="center" color='textPrimary' gutterBottom>
+          marginTop: "10px",
+        }}
+        maxWidth="lg"
+      >
+        {/* <h1 className="news_title">Crypto News</h1> */}
+        <Container maxWidth="sm" gutterbottom sx={{ marginBottom: "10px" }}>
+          <Typography
+            variant="h2"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
             Crypto News
-           </Typography>
+          </Typography>
 
-           <Typography variant="h5" align="center" color='textSecondary' paragraph>
-            This Page Contains a List of Popular Crypto Currency News Articles, Retrieved From Various English Speaking Sources, Collected Over The Past 24 Hour Period. 
-           </Typography>
-         </Container>
+          <Typography
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            paragraph
+          >
+            This Page Contains a List of Popular Crypto Currency News Articles,
+            Retrieved From Various English Speaking Sources, Collected Over The
+            Past 24 Hour Period.
+          </Typography>
+        </Container>
         <Grid container spacing={2} justify="center">
           {articles}
         </Grid>
