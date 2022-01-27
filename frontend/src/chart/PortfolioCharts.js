@@ -6,10 +6,10 @@ import { CircularProgress } from "@mui/material";
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-  const [loading, setLoading] = useState(false);
-
+  // const [finish, setFinish]= useState(0);
+  // const [start,setStart]= useState(0);
   useEffect(() => {
-    setLoading(true);
+
     axios
       .get(`http://localhost:3001/api/portfolio/${props.currentUser}`)
       .then((res) => {
@@ -35,8 +35,13 @@ const PortfolioCharts = (props) => {
             let tomorrow = new Date();
             tomorrow.setDate(today.getDate() + 10);
             let firstDay = new Date(tomorrow);
-
+            let initial = 0;
+            let end = 0;
+            const obj2 = resp.data.timePeriodEnd;
             for (let key in coinObj) {
+              initial += coinObj[key].qty * coinObj[key].price
+              end += obj2[key].qty * obj2[key].price
+
               const currentDate = coinObj[key].date;
 
               if (currentDate) {
@@ -45,7 +50,7 @@ const PortfolioCharts = (props) => {
                 }
               }
             }
-
+            console.log("..................",initial,end)
             const coins = {};
             for (let obj of res.data) {
               for (let key in obj) {
@@ -74,7 +79,6 @@ const PortfolioCharts = (props) => {
             }
 
             setChart({ labels: xvalues, data: yvalues });
-            setLoading(false);
           })
           .catch((err) => console.log(err));
       });
@@ -178,11 +182,10 @@ const PortfolioCharts = (props) => {
     return function destory() {
       myChart.destroy();
     };
-  }, [chart, loading]);
+  }, [chart]);
 
   return (
     <div>
-      {/* { loading ? <CircularProgress /> : <canvas id="myChart"></canvas> } */}
       <canvas id="myChart"></canvas>
     </div>
   );
