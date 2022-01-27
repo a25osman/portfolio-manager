@@ -71,7 +71,6 @@ const LineChart = (props) => {
             },
             title: {
               display: true,
-              text: "Time",
               color: "#911",
               font: {
                 family: "Roboto",
@@ -91,7 +90,6 @@ const LineChart = (props) => {
             },
             title: {
               display: true,
-              text: "Price",
               color: "#911",
               font: {
                 family: "Roboto",
