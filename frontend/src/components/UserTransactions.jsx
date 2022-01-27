@@ -1,7 +1,14 @@
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import Button from "@mui/material/Button";
+import BasicModal from "./BasicModal";
+import DeleteIcon from '@mui/icons-material/Delete'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip} from '@mui/material'
+
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
 const UserTransactions = (props) => {
   const [transactions, setTransactions] = useState([]);
@@ -10,71 +17,70 @@ const UserTransactions = (props) => {
     axios
       .get(`http://localhost:3001/api/transactions/${props.currentUser}`)
       .then((res) => {
+        console.log(res.data)
         setTransactions(res.data);
       });
   }, []);
 
   const transactionDelete = (transactionid) => {
-    transactionid.preventDefault();
+    // event.preventDefault();
     console.log("Im here");
     axios
-      .post(`http://localhost:3001/api/transactions/${transactionid}/delete`)
+      .post(`http://localhost:3001/api/transactions/remove/${transactionid}/delete`, {}, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
       });
   };
 
-  return (
-    <div className="Table">
-      <table>
-        <thead>
-          <tr>
-            <th>Coins Name:</th>
-            <th>Coins Symbol:</th>
-            <th>Amount in Own:</th>
-            <th>Currency:</th>
-            <th>Coins value:</th>
-            <th>Date Bought:</th>
-            <th>Delete Button:</th>
-          </tr>
-        </thead>
-        {transactions.map((transaction) => {
-          return (
-            <>
-              <tbody>
-                <tr key={transaction.id}>
-                  <td>{transaction.coin_name}</td>
-                  <td>{transaction.coin_symbol}</td>
-                  <td>{transaction.quantity}</td>
-                  <td>{transaction.exchange_symbol}</td>
-                  <td>{transaction.exchange_value}</td>
-                  <td>{transaction.date}</td>
-                  <td>
-                    <Button
-                      type="submit"
-                      onClick={() => {
-                        transactionDelete(transaction.id);
-                      }}
-                      variant="contained"
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
+  const table = transactions.map((transaction) => {
+    const str = transaction.coin_name;
+    return (
+      <TableRow
+        key={transaction.id}
+        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      >
+        <TableCell sx={{fontSize:16 }} component="th" scope="row" align='center'>{str.charAt(0).toUpperCase() + str.slice(1)}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{transaction.coin_symbol.toUpperCase()}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{Math.abs(transaction.quantity)}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{transaction.quantity < 0 ? "Sell" : "Buy"}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{transaction.exchange_symbol.toUpperCase()}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{transaction.exchange_value ? formatter.format(transaction.exchange_value) : "-"}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">{transaction.date}</TableCell>
+        <TableCell sx={{fontSize:16 }} align="center">
+          {/* <Button type="submit" onClick={() => {transactionDelete(transaction.id);}} variant="contained">
+            Delete
+          </Button> */}
+          <DeleteIcon type="submit" sx={{ color: "red", fontSize:40  }} onClick={() =>{transactionDelete(transaction.id);}}/>
+        </TableCell>
+      </TableRow>
+    );
+  })
 
-              {/* <p>Coins Name: {transaction.coin_name}</p>
-                  <p>Coins Symbol: {transaction.coin_symbol}</p>
-                  <p>Amount in Own: {transaction.quantity}</p>
-                  <p>Currency: {transaction.exchange_symbol}</p>
-                  <p>Coins value: {transaction.exchange_value}</p>
-                  <p>Date Bought: {transaction.date} </p>
-                  <button onClick={transactionDelete(transaction.id)}>Delete Button</button> */}
-            </>
-          );
-        })}
-      </table>
-    </div>
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650, fontSize:40 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{fontSize:20 }} display="flex" align="center" colSpan={8}>
+              <BasicModal currentUser={props.currentUser} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{fontSize:18 }} align='center'>Name</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Symbol</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Quantity</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Type</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Trading&nbsp;Pair</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Exchange&nbsp;Value</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Transaction&nbsp;Date</TableCell>
+            <TableCell sx={{fontSize:18 }} align="center">Remove Transaction</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {table}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

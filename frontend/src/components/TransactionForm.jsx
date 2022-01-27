@@ -35,7 +35,7 @@ export const TransactionForm = (props) => {
   }, []);
 
   const options = crypto.map((coinObj) => {
-    return <MenuItem value={coinObj.coin_name}>{coinObj.coin_name}</MenuItem>;
+    return <MenuItem key={coinObj.coin_name} value={coinObj.coin_name}>{coinObj.coin_name}</MenuItem>;
   });
 
   const handleSubmit = (event) => {
@@ -59,7 +59,7 @@ export const TransactionForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={2}>
-        <Typography variant="h5" align="center" gutterBottom="true"> Transaction Form </Typography>
+        <Typography variant="h5" align="center" gutterBottom> Transaction Form </Typography>
 
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Coin</InputLabel>

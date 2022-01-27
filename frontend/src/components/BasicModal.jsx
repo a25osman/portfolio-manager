@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TransactionForm from "./TransactionForm";
+import DeleteIcon from '@mui/icons-material/Delete'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const style = {
   position: "absolute",
@@ -24,7 +26,8 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>New-Transaction</Button>
+      <b>Recent Transactions</b>
+      <Button onClick={handleOpen}><AddCircleIcon sx={{ color: "#1976D2", fontSize:40  }} /></Button>
       <Modal
         open={open}
         onClose={handleClose}

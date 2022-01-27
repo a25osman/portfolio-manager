@@ -68,7 +68,7 @@ const News = () => {
             Crypto News
           </Typography>
 
-          <Typography
+          {/* <Typography
             variant="h5"
             align="center"
             color="textSecondary"
@@ -77,7 +77,7 @@ const News = () => {
             This Page Contains a List of Popular Crypto Currency News Articles,
             Retrieved From Various English Speaking Sources, Collected Over The
             Past 24 Hour Period.
-          </Typography>
+          </Typography> */}
         </Container>
         <Grid container spacing={2} justify="center">
           {articles}

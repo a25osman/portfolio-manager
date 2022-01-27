@@ -39,9 +39,9 @@ export const NewItem = ({ urlToImage, url, description, title }) => {
         ></CardMedia>
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography gutterbottom variant="h5">
-            <Link href={url}>{title}</Link>
+            <Link sx={{color:"black"}} href={url}>{title}</Link>
           </Typography>
-          <Typography>{description}</Typography>
+          {/* <Typography>{description}</Typography> */}
         </CardContent>
       </Card>
     </Grid>

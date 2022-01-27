@@ -75,7 +75,7 @@ const PortfolioCharts = (props) => {
             const yvalues = [];
             const allDays = getDaysArray(new Date(firstDay), new Date());
             allDays.forEach((date, index) => {
-              if (index < allDays.length - 1) {
+              if (index < allDays.length - 2) {
                 xvalues.push(date.toLocaleDateString("en-US"));
                 yvalues.push(0);
               }
@@ -86,7 +86,7 @@ const PortfolioCharts = (props) => {
                 if (coins[coin][date]) {
                   const i = xvalues.indexOf(date);
                   const amt = coins[coin][date][2];
-                  yvalues[i] += amt;
+                  yvalues[i] += Math.abs(amt);
                 }
               });
             }

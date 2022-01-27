@@ -16,18 +16,9 @@ import UserTransactions from "../components/UserTransactions";
 import BasicModal from "../components/BasicModal";
 
 import { UserContext } from "../App";
-import {
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  CssBaseline,
-  Grid,
-  Toolbar,
-  Container,
-} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+import { Typography, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container, } from "@material-ui/core";
+import {Stack, Divider} from "@mui/material"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -65,20 +56,36 @@ const Portfolio = (props) => {
     <>
       <CssBaseline />
       <NavBar currentUser={user} />
-      <Container>
-        <Typography
-          margintop="20px"
-          variant="h2"
-          align="center"
-          color="textPrimary"
-          gutterBottom
-        >
-          Dashboard
-        </Typography>
-        <PortfolioCharts currentUser={user.username} />
-        <Holdings currentUser={user.username} />
-        <BasicModal currentUser={user.username} />
-      </Container>
+      <Stack sx={{mt:3, mb:15}} direction="column" justifyContent="space-between" alignItems="center" spacing={6}>
+        
+        <Container sx={{mt:1}}>
+          <Typography variant="h2" align="center" color="textPrimary"> 
+            Dashboard 
+          </Typography>
+        </Container>
+        
+        <Container >
+          <Box sx={{bgcolor: 'white'}}>
+            <Typography variant="h6" align="left" color="textPrimary"> 
+              Your Portfolio (CAD)
+            </Typography>
+            <PortfolioCharts currentUser={user.username} />
+          </Box>
+        </Container>
+
+        <Container>
+          <Holdings currentUser={user.username} />
+        </Container>
+        
+        {/* <Card>
+          <BasicModal currentUser={user.username} />
+        </Card> */}
+
+        <Container>
+          <UserTransactions currentUser={user.username}/>
+        </Container>
+
+      </Stack>
     </>
     // <div>
 
