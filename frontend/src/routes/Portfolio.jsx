@@ -67,7 +67,7 @@ const Portfolio = (props) => {
       <NavBar currentUser={user} />
       <Container>
         <Typography
-          className="news_title"
+          marginTop="15px"
           variant="h2"
           align="center"
           color="textPrimary"

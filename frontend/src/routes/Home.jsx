@@ -16,7 +16,6 @@ const Home = () => {
   const [currentUser, setCurrentUser] = useState("null");
   const [errorCheck, setErrorCheck] = useState(null);
 
-
   const ErrorMessage = () => {
     return (
       <div>
@@ -74,7 +73,16 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <h1 className="news_title">Tradeable Assets</h1>
+      <Typography
+        marginTop="15px"
+        variant="h2"
+        align="center"
+        color="textPrimary"
+        gutterBottom
+      >
+        Tradeable Assets
+      </Typography>
+
       <div className="cryptolist">
         <CryptoList />
       </div>

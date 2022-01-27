@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import SearchTerms from "../components/SearchTerms";
 import "../css/favoritepage.css";
+//import { Typography } from "@material-ui/core/styles/createTypography";
+import { Typography } from "@mui/material";
 export default function Favorties() {
   // const [searchterm, setSearchterm] = useState("");
   // let navigate = useNavigate();
@@ -19,7 +21,16 @@ export default function Favorties() {
   return (
     <div className="fav">
       <NavBar />
-      <h1 className="googleHeading">Google Search Trends</h1>
+      <Typography
+        marginTop="15px"
+        variant="h2"
+        align="center"
+        color="textPrimary"
+        gutterBottom
+      >
+        Google Search Trends
+      </Typography>
+
       <div className="favoritepage">
         <Box
           sx={{
