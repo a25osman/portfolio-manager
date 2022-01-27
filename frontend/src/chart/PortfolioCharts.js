@@ -3,11 +3,21 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import { red } from "@mui/material/colors";
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
 
 const PortfolioCharts = (props) => {
   const [chart, setChart] = useState({ labels: [], datasets: [] });
-  // const [finish, setFinish]= useState(0);
-  // const [start,setStart]= useState(0);
+  const [finish, setFinish]= useState(0);
+  const [start,setStart]= useState(0);
   useEffect(() => {
 
     axios
@@ -51,6 +61,9 @@ const PortfolioCharts = (props) => {
               }
             }
             console.log("..................",initial,end)
+            setStart(initial);
+            setFinish(end);
+
             const coins = {};
             for (let obj of res.data) {
               for (let key in obj) {
@@ -118,13 +131,14 @@ const PortfolioCharts = (props) => {
         plugins: {
           title: {
               display: true,
-              text: 'Your Portfolio ',
+              text: [`Your Portfolio (${formatter.format(finish)})`,((finish - start)/(start))*100],
               font: {
                 family: "Roboto",
                 size: 30,
                 style: "normal",
                 lineHeight: 1.2,
               },
+              color:"red",
               align:"start",
           }
       },
@@ -182,7 +196,7 @@ const PortfolioCharts = (props) => {
     return function destory() {
       myChart.destroy();
     };
-  }, [chart]);
+  }, [chart,start]);
 
   return (
     <div>
