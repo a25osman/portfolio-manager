@@ -45,8 +45,8 @@ module.exports = (db) => {
       .catch((err) => console.log(err));
   });
 
-  // POST /api/portfolio/:username/:asset_id/delete
-  router.post("/:username/:asset_id/delete", (req, res) => {
+  // POST /api/portfolio/remove/:asset_id/delete
+  router.post("/remove/:asset_id/delete", (req, res) => {
     db.query(
       `
     DELETE FROM assets
@@ -86,7 +86,7 @@ module.exports = (db) => {
 
           try {
             const response = await axios.get(
-              `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${days}&interval=daily`
+              `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=cad&days=${days}&interval=daily`
             );
             if (coin_list[coin] >= 0) {
               //duplicate coin added
@@ -148,7 +148,7 @@ module.exports = (db) => {
             today.toLocaleDateString("en-US")
           ];
         }
-
+        console.log(results[0])
         res.json(results);
       })
       .catch((err) => console.log(err));

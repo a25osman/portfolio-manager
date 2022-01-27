@@ -24,7 +24,8 @@ module.exports = (db) => {
     FROM users
     JOIN assets ON assets.user_id = users.id
     JOIN transactions ON transactions.asset_id = assets.id 
-    WHERE users.username = $1;
+    WHERE users.username = $1
+    ORDER BY transactions.id DESC;
     `, [req.params.username])
       .then(data => {
         res.json(data.rows)
@@ -62,8 +63,8 @@ module.exports = (db) => {
       
   });
 
-  // POST /api/transactions/:transaction_id/delete
-  router.post("/:transaction_id/delete", (req, res) => {
+  // POST /api/transactions/remove/:transaction_id/delete
+  router.post("/remove/:transaction_id/delete", (req, res) => {
     db.query(`
     DELETE FROM transactions
     WHERE id = $1
