@@ -1,7 +1,4 @@
-.news-section {
-  /* display: grid;
-  grid-template-columns: repeat(3,300px);
-  grid-auto-rows: auto; */
+/* .news-section {
   display: flex;
   align-items: center;
   width: 800px;
@@ -40,4 +37,4 @@
   font-family: 'Times New Roman', Times, serif;
   font-style: oblique;
   font-size: 50px;
-}
+} */
