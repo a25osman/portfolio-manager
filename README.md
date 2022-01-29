@@ -4,8 +4,8 @@ Portfolio is multi-page asset tracker and portfolio manager app, which using liv
 
 ## Final Product
 
-!["Screenshot of dashboard"]()
+!["Screenshot of dashboard"](https://raw.githubusercontent.com/a25osman/portfolio-manager/master/docs/portfolio.png)
 
-!["screenshot of portfolio assets"]()
+!["screenshot of portfolio assets"](https://raw.githubusercontent.com/a25osman/portfolio-manager/master/docs/portfolio%20dashboard.png)
 
-!["screenshot of news page"]()
+!["screenshot of news page"](https://raw.githubusercontent.com/a25osman/portfolio-manager/master/docs/portfolio%20news.png)
